@@ -1,77 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>@yield('title')</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{{asset('TSR1.png')}}" />
+        <!-- Custom Google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
 
-<head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="TemplateMo">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-
-    <title>@yield('title')</title>
-<!--
-
-Lava Landing Page
-
-https://templatemo.com/tm-540-lava-landing-page
-
--->
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="{{asset('vendor')}}/assets/css/bootstrap.min.css">
-
-    <link rel="stylesheet" type="text/css" href="{{asset('vendor')}}/assets/css/font-awesome.css">
-
-    <link rel="stylesheet" href="{{asset('vendor')}}/assets/css/templatemo-lava.css">
-
-    <link rel="stylesheet" href="{{asset('vendor')}}/assets/css/owl-carousel.css">
-
-</head>
-
-<body>
-
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <!-- ***** Preloader End ***** -->
-
-
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        @include('layouts.topbar')
-    </header>
-    <!-- ***** Header Area End ***** -->
-
-
-    @yield('content')
-
-    <!-- ***** Footer Start ***** -->
-    <footer id="contact-us">
+        <link href="{{asset('vendor1')}}/css/styles.css" rel="stylesheet" />
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            @include('layouts.topbar')
+            
+            @yield('content')
+        </main>
+        <!-- Footer-->
         @include('layouts.footer')
-    </footer>
-
-    <!-- jQuery -->
-    <script src="{{asset('vendor')}}/assets/js/jquery-2.1.0.min.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="{{asset('vendor')}}/assets/js/popper.js"></script>
-    <script src="{{asset('vendor')}}/assets/js/bootstrap.min.js"></script>
-
-    <!-- Plugins -->
-    <script src="{{asset('vendor')}}/assets/js/owl-carousel.js"></script>
-    <script src="{{asset('vendor')}}/assets/js/scrollreveal.min.js"></script>
-    <script src="{{asset('vendor')}}/assets/js/waypoints.min.js"></script>
-    <script src="{{asset('vendor')}}/assets/js/jquery.counterup.min.js"></script>
-    <script src="{{asset('vendor')}}/assets/js/imgfix.min.js"></script>
-
-    <!-- Global Init -->
-    <script src="{{asset('vendor')}}/assets/js/custom.js"></script>
-
-</body>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{asset('vendor1')}}/js/scripts.js"></script>
+    </body>
 </html>

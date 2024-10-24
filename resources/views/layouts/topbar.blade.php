@@ -1,34 +1,18 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <nav class="main-nav ">
-                <!-- ***** Logo Start ***** -->
-                <a href="index.html" class="logo menu-item">
-                    <img src="{{asset('TSR.png')}}" width="10%" alt="">
-                </a>
-                <!-- ***** Logo End ***** -->
-                <!-- ***** Menu Start ***** -->
-                <ul class="nav">
-                    <li class="scroll-to-section"><a href="#welcome" class="menu-item">Home</a></li>
-                    <li class="scroll-to-section"><a href="#about" class="menu-item">About</a></li>
-                    <li class="scroll-to-section"><a href="#testimonials" class="menu-item">Testimonials</a>
-                    </li>
-                    <li class="submenu">
-                        <a href="javascript:;">Drop Down</a>
-                        <ul>
-                            <li><a href="" class="menu-item">About Us</a></li>
-                            <li><a href="" class="menu-item">Features</a></li>
-                            <li><a href="" class="menu-item">FAQ's</a></li>
-                            <li><a href="" class="menu-item">Blog</a></li>
-                        </ul>
-                    </li>
-                    <li class="scroll-to-section"><a href="#contact-us" class="menu-item">Contact Us</a></li>
-                </ul>
-                <a class='menu-trigger'>
-                    <span>Menu</span>
-                </a>
-                <!-- ***** Menu End ***** -->
-            </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <div class="container px-5">
+        <a class="navbar-brand" href="index.html">
+            <img class="fw-bolder text-primary" src="{{ asset('TSR1.png') }}" width="50" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                <li class="nav-item"><a class="nav-link active" href="index.html" aria-current="page">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
         </div>
     </div>
-</div>
+</nav>
