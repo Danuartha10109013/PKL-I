@@ -37,16 +37,15 @@
                   <div class="row mt-3">
                     <div class="col-4"></div>
                     <div class="col-5 text-center px-1">
-                      <img src="{{asset('TSR.png')}}" style="width: 100%" alt="">
+                      <img src="{{asset('TSRr.png')}}" style="width: 100%" alt="">
                     </div>
                     <div class="col-2"></div>
                   </div>
                 </div>
               </div>
               <div class="card-body">
-                <form action="{{route('login-proses')}}" role="form" class="text-start" method="POST">
+                <form action="{{route('login-proses')}}" class="text-start" method="POST">
                   @csrf
-
                   <!-- Success Alert -->
                   @if (session('success'))
                   <script>
@@ -94,7 +93,7 @@
                   <!-- Form Fields -->
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Email or Username</label>
-                    <input type="text" name="email_or_username" class="form-control">
+                    <input type="text" name="username" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
@@ -107,10 +106,7 @@
                   <div class="text-center">
                     <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign in</button>
                   </div>
-                  <p class="mt-4 text-sm text-center">
-                    Don't have an account?
-                    <a href="{{asset('admin')}}/pages/sign-up.html" class="text-primary text-gradient font-weight-bold">Sign up</a>
-                  </p>
+                  
                 </form>
               </div>
             </div>
@@ -155,7 +151,7 @@
   <script src="{{asset('admin')}}/assets/js/core/bootstrap.min.js"></script>
   <script src="{{asset('admin')}}/assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="{{asset('admin')}}/assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script>
+  {{-- <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
       var options = {
@@ -163,7 +159,7 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-  </script>
+  </script> --}}
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Control Center for Material Dashboard -->

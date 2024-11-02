@@ -14,6 +14,9 @@ class LoginController extends Controller
     public function index(){
         return view('auth.login');
     }
+    public function login(){
+        return view('pages.login');
+    }
 
     public function proses(Request $request)
     {
@@ -31,7 +34,7 @@ class LoginController extends Controller
             $user = Auth::user();
     
             // Check if the user is active (e.g., 'active' field in the User model)
-            if ($user->active == 2) {
+            if ($user->active != 1) {
                 Auth::logout(); // Ensure the user is logged out
                 return redirect()->back()->with('error', 'Akun Anda tidak aktif.');
             }
@@ -39,7 +42,11 @@ class LoginController extends Controller
             // Check the user's role
             if ($user->role == 0) {
                 return redirect()->route('admin.dashboard')->with('success', 'Hallo Selamat Datang ' . Auth::user()->name);
-            } else {
+            } elseif($user->role == 1){
+                return redirect()->route('landing-page')->with('success', 'Hallo Selamat Datang ' . Auth::user()->name);
+
+            }
+             else {
                 Auth::logout(); // Prevent access if the user is not an admin
                 return redirect()->back()->with('error', 'You are not authorized to access this area.');
             }
@@ -52,9 +59,14 @@ class LoginController extends Controller
 
 
 public function logout(Request $request) {
-    Auth::logout();
     // Mengarahkan kembali ke halaman login dengan pesan sukses
-    return redirect()->route('login')->with('success', 'Kamu berhasil Logout');
+    if(Auth::user()->role == 0){
+        Auth::logout();
+        return redirect()->route('admin.login')->with('success', 'Kamu berhasil Logout');
+    }else{
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Kamu berhasil Logout');
+    }
 }
 public function logoutUserById($userId)
 {

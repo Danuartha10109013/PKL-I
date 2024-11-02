@@ -8,13 +8,18 @@
     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
       <div class="ms-md-auto pe-md-3 d-flex align-items-center">
         <div class="input-group input-group-outline">
-          <label class="form-label">Type here...</label>
-          <input type="text" class="form-control">
+          
         </div>
       </div>
       <ul class="navbar-nav d-flex align-items-center  justify-content-end">
+        <li class="nvbar-nav">
+
+          <a class=" avbar-nav d-flex align-items-center  justify-content-end" target="_blank" href="{{route('landing-page')}}">
+            <i class="material-symbols-rounded">home</i>
+          </a>
+        </li>
         
-        
+
         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
           <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
             <div class="sidenav-toggler-inner">
@@ -102,11 +107,37 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item d-flex align-items-center">
-          <a href="" class="nav-link text-body font-weight-bold px-0">
-            <i class="material-symbols-rounded">account_circle</i>
+        <li class="nav-item dropdown d-flex align-items-center">
+          <a href="#" class="nav-link text-body font-weight-bold px-0 " id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            @if (Auth::user()->profile)
+              
+            <img src="{{ asset('storage/' . Auth::user()->profile)}}" 
+                 class="rounded-circle" 
+                 alt="Profile" 
+                 width="30" 
+                 height="30"
+                >
+                @else
+                <i class="material-symbols-rounded">account_circle</i>
+            @endif
           </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="{{ route('profile') }}">
+                <i class="material-symbols-rounded">edit</i> Edit Profile
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="material-symbols-rounded">logout</i> Logout
+              </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+              </form>
+            </li>
+          </ul>
         </li>
+        
       </ul>
     </div>
   </div>

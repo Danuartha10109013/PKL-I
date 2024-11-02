@@ -20,6 +20,8 @@
   <!-- Material Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
   <!-- CSS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <link id="pagestyle" href="{{asset('admin')}}/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
 </head>
 
@@ -34,6 +36,46 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-2">
+      @if (session('success'))
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              text: '{{ session('success') }}',
+              showConfirmButton: false,
+              timer: 3000
+            });
+          });
+        </script>
+        @endif
+
+        @if (session('error'))
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: '{{ session('error') }}',
+              showConfirmButton: false,
+              timer: 3000
+            });
+          });
+        </script>
+        @endif
+
+        @if ($errors->any())
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+              icon: 'error',
+              title: 'Validation Error!',
+              html: '<ul>@foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach</ul>',
+              showConfirmButton: true
+            });
+          });
+        </script>
+        @endif
       @yield('content')
       <footer class="footer py-4  ">
         @include('layouts.admin.footer')
