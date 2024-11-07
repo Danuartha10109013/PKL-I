@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardControlller;
 use App\Http\Controllers\KadminController;
 use App\Http\Controllers\KPembeliController;
+use App\Http\Controllers\KProductController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesananController;
@@ -47,7 +48,12 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::delete('/delete/{id}',[KPembeliController::class, 'delete'])->name('k-pembeli.delete');
         });
         Route::prefix('product')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('product');
+            Route::get('/',[KProductController::class, 'index'])->name('product');
+            Route::post('/store',[KProductController::class, 'store'])->name('product.store');
+            Route::get('/edit/{id}',[KProductController::class, 'edit'])->name('product.edit');
+            Route::put('/update/{id}',[KProductController::class, 'update'])->name('product.update');
+            Route::delete('/delete/{id}',[KProductController::class, 'delete'])->name('product.delete');
+
 
         });
         Route::prefix('rekomendasi')->group(function () {
