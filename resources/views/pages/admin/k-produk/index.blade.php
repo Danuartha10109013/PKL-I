@@ -3,6 +3,104 @@
 @section('pages', 'Kelola Produk')
 
 @section('content')
+<div class="container">
+    <!-- Button to trigger Kategori modal -->
+<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kategoriModal">
+    <i class="fa fa-plus"></i> Kategori
+</a>
+
+<!-- Button to trigger Jenis modal -->
+<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#jenisModal">
+    <i class="fa fa-plus"></i> Jenis
+</a>
+
+<!-- Kategori Modal -->
+<div class="modal fade" id="kategoriModal" tabindex="-1" aria-labelledby="kategoriModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="kategoriModalLabel">Tambah Kategori</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form to add new category -->
+                <form action="{{ route('admin.product.kategori') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="kategoriName" class="form-label">Nama Kategori</label>
+                        <input type="text" class="form-control" id="kategoriName" name="nama_kategori" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoriDesc" class="form-label">Deskripsi Kategori</label>
+                        <textarea class="form-control" id="kategoriDesc" name="deskripsi_kategori" rows="3" required></textarea>
+                    </div>
+
+                    <!-- Display existing categories -->
+                    <p>Existing Categories</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Deskripsi</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($categories as $c)
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$loop->iteration}}</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$c->name}}</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$c->deskripsi}}</td>
+                                        <td>
+                                            <!-- Add edit and delete buttons as needed -->
+                                            <a href="" class="btn btn-sm btn-warning">Edit</a>
+                                            <form action="" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Jenis Modal -->
+<div class="modal fade" id="jenisModal" tabindex="-1" aria-labelledby="jenisModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jenisModalLabel">Tambah Jenis</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.product.jenis') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="jenisName" class="form-label">Nama Jenis</label>
+                        <input type="text" class="form-control" id="jenisName" name="nama_jenis" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jenisDesc" class="form-label">Deskripsi Jenis</label>
+                        <textarea class="form-control" id="jenisDesc" name="deskripsi_jenis" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 <div class="card">
     <div class="container mt-3">
         <div class="d-flex justify-content-between">
@@ -181,9 +279,9 @@
 
                     @endforeach
                 </tbody>
+                {{-- {{$data->links()}} --}}
             </table>
         </div>
-
        <!-- Add User Modal -->
         <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
             <div class="modal-dialog">

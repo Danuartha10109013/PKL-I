@@ -50,11 +50,11 @@ Route::middleware([AutoLogout::class])->group(function () {
         Route::prefix('product')->group(function () {
             Route::get('/',[KProductController::class, 'index'])->name('product');
             Route::post('/store',[KProductController::class, 'store'])->name('product.store');
+            Route::post('/kategori',[KProductController::class, 'kategori'])->name('product.kategori');
+            Route::post('/jenis',[KProductController::class, 'jenis'])->name('product.jenis');
             Route::get('/edit/{id}',[KProductController::class, 'edit'])->name('product.edit');
             Route::put('/update/{id}',[KProductController::class, 'update'])->name('product.update');
             Route::delete('/delete/{id}',[KProductController::class, 'delete'])->name('product.delete');
-
-
         });
         Route::prefix('rekomendasi')->group(function () {
             Route::get('/',[KPembeliController::class, 'index'])->name('rekomendasi');

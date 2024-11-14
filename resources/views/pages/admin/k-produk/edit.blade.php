@@ -6,118 +6,125 @@
 <div class="card">
     <div class="container mt-3">
         <div class="d-flex justify-content-between">
-            <h4>Edit Produk || {{$data->name}}</h4>
+            <h4>Edit Produk || {{ $data->name }}</h4>
         </div>
+        
+        <!-- Product Edit Form -->
         <form action="{{ route('admin.product.update', $data->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PUT') <!-- For update request -->
-
-            <div class="form-control">
-                <!-- Kode Produk (Read-only) -->
-                <div class="mb-3">
-                    <label for="kode_produk" class="form-label">Kode Produk</label>
-                    <input type="text" name="kode_produk" class="form-control" value="{{ $data->kode_produk }}" readonly>
-                </div>
-
-                <!-- Nama Produk -->
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nama Produk</label>
-                    <input type="text" name="name" class="form-control" value="{{ $data->name }}" required>
-                </div>
-
-                <!-- Deskripsi -->
-                <div class="mb-3">
-                    <label for="deskripsi" class="form-label">Deskripsi</label>
-                    <textarea name="deskripsi" class="form-control" required>{{ $data->deskripsi }}</textarea>
-                </div>
-
-                <!-- Harga -->
-                <div class="mb-3">
-                    <label for="harga" class="form-label">Harga</label>
-                    <input type="number" name="harga" class="form-control" value="{{ $data->harga }}" required>
-                </div>
-
-                <!-- Spesifikasi (Dynamic fields) -->
-                <div class="mb-3">
-                    <label for="sfesifikasi" class="form-label">Spesifikasi</label>
-                    <div id="specificationsContainer">
-                        @php
-                            $specs = json_decode($data->sfesifikasi); // Decode the JSON string into an array
-                        @endphp
-                        @foreach($specs as $spec)
+            @method('PUT')
+            
+            <div class="mb-3">
+                <label for="kode_produk" class="form-label">Product Code</label>
+                <input type="text" class="form-control" id="kode_produk" name="kode_produk" value="{{ $data->kode_produk }}" required style="outline: 2px solid grey;">
+            </div>
+            
+            <div class="mb-3">
+                <label for="name" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ $data->name }}" required style="outline: 2px solid grey;">
+            </div>
+            
+            <div class="mb-3">
+                <label for="deskripsi" class="form-label">Description</label>
+                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required style="outline: 2px solid grey;">{{ $data->deskripsi }}</textarea>
+            </div>
+            
+            <!-- Dynamic Specifications -->
+            <div class="mb-3">
+                <label class="form-label">Specifications</label>
+                <div id="specificationsContainer">
+                    @php
+                        $spek = json_decode($data->sfesifikasi);
+                        $img = json_decode($data->gambar);
+                    @endphp
+                    @foreach ($spek as $specification)
                         <div class="input-group mb-2">
-                            <input type="text" class="form-control" name="sfesifikasi[]" value="{{ $spec }}" required>
+                            <input type="text" class="form-control" name="sfesifikasi[]" value="{{ $specification }}" placeholder="Enter specification" required>
                             <button type="button" class="btn btn-outline-danger" onclick="removeField(this)">-</button>
                         </div>
-                        @endforeach
+                    @endforeach
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" name="sfesifikasi[]" placeholder="Enter specification">
+                        <button type="button" class="btn btn-outline-primary" onclick="addSpecification()">+</button>
                     </div>
-                    <button type="button" class="btn btn-outline-primary" onclick="addSpecification()">+</button>
                 </div>
-
-                <!-- Gambar -->
-                <div class="mb-3">
-                    <label for="gambar" class="form-label">Gambar</label>
-                    <input type="file" name="gambar[]" class="form-control" multiple>
-                    <!-- Show current images -->
-                    @if ($data->gambar)
-                        <div class="mt-2">
-                            @foreach (json_decode($data->gambar) as $image)
-                                <img src="{{ asset('storage/' . $image) }}" width="100px" alt="Product Image">
-                            @endforeach
+            </div>
+            
+            <!-- Dynamic Image Uploads -->
+            <div class="mb-3">
+                <label class="form-label">Images <br> <small style="color: red">* Jika menambahkan file baru, file sebelumnnya hilang</small></label>
+                <div id="imagesContainer">
+                    @foreach ($img as $image)
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" name="gambar[]" value="{{$image}}" accept="image/*">
+                            <button type="button" class="btn btn-outline-danger" onclick="removeField(this)">-</button>
                         </div>
-                    @endif
+                    @endforeach
+                    <div class="input-group mb-2">
+                        <input type="file" class="form-control" name="gambar[]" accept="image/*">
+                        <button type="button" class="btn btn-outline-primary" onclick="addImage()">+</button>
+                    </div>
                 </div>
+            </div>
 
-                <!-- Jenis ID -->
-                <div class="mb-3">
-                    <label for="jenis_id" class="form-label">Jenis Produk</label>
-                    <input type="number" name="jenis_id" class="form-control" value="{{ $data->jenis_id }}" required>
-                </div>
-
-                <!-- Kategori ID -->
-                <div class="mb-3">
-                    <label for="kategori_id" class="form-label">Kategori Produk</label>
-                    <input type="number" name="kategori_id" class="form-control" value="{{ $data->kategori_id }}" required>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">Update Produk</button>
+            <div class="mb-3">
+                <label for="harga" class="form-label">Price</label>
+                <input type="number" class="form-control" id="harga" name="harga" value="{{ $data->harga }}" required style="outline: 2px solid grey;">
+            </div>
+            
+            <div class="mb-3">
+                <label for="jenis_id" class="form-label">Type</label>
+                <select class="form-select" id="jenis_id" name="jenis_id" required style="outline: 2px solid grey;">
+                    <option value="" selected disabled>Select Type</option>
+                    @foreach($types as $type)
+                        <option value="{{ $type->id }}" {{ $type->id == $data->jenis_id ? 'selected' : '' }}>{{ $type->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="kategori_id" class="form-label">Category</label>
+                <select class="form-select" id="kategori_id" name="kategori_id" required style="outline: 2px solid grey;">
+                    <option value="" selected disabled>Select Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ $category->id == $data->kategori_id ? 'selected' : '' }}>{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
         </form>
     </div>
 </div>
 
-@section('scripts')
+<!-- JavaScript for Adding More Fields -->
 <script>
-    // Function to add a new specification input field
     function addSpecification() {
-        // Get the container where the input fields will be added
         const container = document.getElementById('specificationsContainer');
-        
-        // Create a new div element that will hold the new input field and the remove button
         const inputGroup = document.createElement('div');
-        
-        // Assign the appropriate classes for styling
         inputGroup.className = 'input-group mb-2';
-        
-        // Set the inner HTML of the new div with an input field and remove button
         inputGroup.innerHTML = `
-            <input type="text" class="form-control" name="sfesifikasi[]" placeholder="Enter specification" required>
+            <input type="text" class="form-control" name="sfesifikasi[]" placeholder="Enter specification">
             <button type="button" class="btn btn-outline-danger" onclick="removeField(this)">-</button>
         `;
-        
-        // Append the newly created input group to the container
         container.appendChild(inputGroup);
     }
 
-    // Function to remove a specification input field when the "-" button is clicked
+    function addImage() {
+        const container = document.getElementById('imagesContainer');
+        const inputGroup = document.createElement('div');
+        inputGroup.className = 'input-group mb-2';
+        inputGroup.innerHTML = `
+            <input type="file" class="form-control" name="gambar[]" accept="image/*">
+            <button type="button" class="btn btn-outline-danger" onclick="removeField(this)">-</button>
+        `;
+        container.appendChild(inputGroup);
+    }
+
     function removeField(button) {
-        // Get the parent div of the button (which is the input group div)
-        const inputGroup = button.parentElement;
-        
-        // Remove the input group from the container
-        inputGroup.remove();
+        button.parentElement.remove();
     }
 </script>
-@endsection
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProdukM;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -12,7 +13,8 @@ class LandingController extends Controller
     }
     public function product(Request $request)
     {
-        return view('pages.product.index');
+        $data=ProdukM::all();
+        return view('pages.product.index',compact('data'));
     }
     public function customer(Request $request)
     {

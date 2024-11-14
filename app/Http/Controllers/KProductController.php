@@ -62,13 +62,15 @@ class KProductController extends Controller
 
     public function edit($id){
         $data = ProdukM::find($id);
-        return view('pages.admin.k-produk.edit',compact('data'));
+        $types= JenisM::all();
+        $categories= KategoriM::all();
+        return view('pages.admin.k-produk.edit',compact('data','types','categories'));
     }
 
     // Update Product
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         // Validate the incoming data
         $request->validate([
             'kode_produk' => 'required|string|max:255',
@@ -76,61 +78,61 @@ class KProductController extends Controller
             'deskripsi' => 'required|string',
             'sfesifikasi' => 'nullable|array',
             'gambar' => 'nullable|array',
-            'gambar.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'gambar.*' => 'nullable',
             'harga' => 'required|numeric',
             'jenis_id' => 'required|exists:jenis,id',
             'kategori_id' => 'required|exists:kategori,id',
+            'delete_gambar' => 'nullable|array',
+            'delete_gambar.*' => 'integer',
         ]);
-    
+
         // Find the product by ID
         $product = ProdukM::findOrFail($id);
-    
-        // Update the basic product fields
+
+        // Update basic product fields
         $product->kode_produk = $request->kode_produk;
         $product->name = $request->name;
         $product->deskripsi = $request->deskripsi;
         $product->harga = $request->harga;
         $product->jenis_id = $request->jenis_id;
         $product->kategori_id = $request->kategori_id;
-    
-        // Handle Specifications (if any)
+
         if ($request->has('sfesifikasi')) {
-            $product->sfesifikasi = json_encode($request->sfesifikasi);  // Store as JSON
-        }
-    
-        // Handle Images (if any)
-        if ($request->hasFile('gambar')) {
-            // Decode the existing images
-            $img = json_decode($product->gambar, true) ?? [];
-    
-            $images = [];
-            foreach ($request->file('gambar') as $image) {
-                // Upload new image
-                $imagePath = $image->store('products', 'public');  // Store images in 'public/products' directory
-                $images[] = $imagePath;
+            // Filter out any null values
+            $sfesifikasi = array_filter($request->sfesifikasi, function($value) {
+                return !is_null($value);
+            });
+        
+            // Check if there are any non-null specifications left
+            if (!empty($sfesifikasi)) {
+                $product->sfesifikasi = json_encode($sfesifikasi);
             }
-    
-            // If the request has images to delete
-            if ($request->has('delete_gambar')) {
-                $deleteGambar = $request->delete_gambar;
-                foreach ($deleteGambar as $key => $delete) {
-                    if ($delete) {
-                        // Remove the image from storage
-                        $imagePathToDelete = $img[$key];  // Get the old image path
-                        Storage::disk('public')->delete($imagePathToDelete);
-                    }
+        }
+
+        foreach ($request->gambar as $newImage) {
+            if ($request->hasFile('gambar')) {
+                foreach ($request->file('gambar') as $image) {
+                    $filename = $image->getClientOriginalName();
+                    $path = $image->storeAs("images/products/{$request->kode_produk}", $filename, 'public');
+                    
+                    $uploadedImages[] = $path;
+                }
+            } else {
+                // If no file is uploaded and the image is in the array (non-file data), add it
+                foreach ($request->gambar as $image) {
+                    $uploadedImages[] = $image;
                 }
             }
-    
-            // Merge the new images with the old ones
-            $product->gambar = json_encode(array_merge($images, $img));
         }
-    
+        
+
+        // After processing all the new images, update the 'gambar' field in the database
+        $product->gambar = json_encode($uploadedImages);
         // Save the updated product
         $product->save();
+
+        return redirect()->route('admin.product')->with('success', 'Product updated successfully.');
     
-        // Redirect back or to the product list page
-        return redirect()->back()->with('success', 'Product updated successfully.');
     }
 
     // Delete Product (and optionally images)
