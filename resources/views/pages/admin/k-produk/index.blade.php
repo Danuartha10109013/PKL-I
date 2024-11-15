@@ -36,7 +36,10 @@
                     </div>
 
                     <!-- Display existing categories -->
-                    <p>Existing Categories</p>
+                    
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
+                <p>Existing Categories</p>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -55,8 +58,7 @@
                                         <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$c->deskripsi}}</td>
                                         <td>
                                             <!-- Add edit and delete buttons as needed -->
-                                            <a href="" class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="" method="POST" style="display:inline-block;">
+                                            <form action="{{route('admin.product.kategori.delete',$c->id)}}" method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
@@ -67,8 +69,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </form>
             </div>
         </div>
     </div>
@@ -94,8 +94,41 @@
                         <label for="jenisDesc" class="form-label">Deskripsi Jenis</label>
                         <textarea class="form-control" id="jenisDesc" name="deskripsi_jenis" rows="3" required></textarea>
                     </div>
+
+                    
+
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
+                <p>Existing Jenis</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Deskripsi</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($types as $t)
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$loop->iteration}}</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$t->name}}</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$t->deskripsi}}</td>
+                                        <td>
+                                            <!-- Add edit and delete buttons as needed -->
+                                            <form action="" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
             </div>
         </div>
     </div>
@@ -112,50 +145,50 @@
                     <i class="material-symbols-rounded opacity-5">filter</i> Filter Kategori
                 </button>
             </div>
-
+            
             <div>
                 <!-- Button to Filter by Jenis -->
                 <button onclick="showFilterJenis()" style="border:none; background:none; cursor: pointer;">
                     <i class="material-symbols-rounded opacity-5">filter</i> Filter Jenis
                 </button>
             </div>
-
+            
             <script>
-            function showFilterKategori() {
-                Swal.fire({
-                    title: 'Filter by Kategori',
-                    html:
-                        '<ul style="list-style: none; padding: 0;">' +
-                        '<li><button class="mb-3 btn btn-primary" onclick="applyFilter(\'Kategori A\')">Kategori A</button></li>' +
-                        '<li><button class="mb-3 btn btn-primary" onclick="applyFilter(\'Kategori B\')">Kategori B</button></li>' +
-                        '<li><button class="mb-3 btn btn-primary" onclick="applyFilter(\'Kategori C\')">Kategori C</button></li>' +
-                        '</ul>',
-                    showConfirmButton: false
-                });
-            }
-
-            function showFilterJenis() {
-                Swal.fire({
-                    title: 'Filter by Jenis',
-                    html:
-                        '<ul style="list-style: none; padding: 0;">' +
-                        '<li><button onclick="applyFilter(\'Jenis A\')">Jenis A</button></li>' +
-                        '<li><button onclick="applyFilter(\'Jenis B\')">Jenis B</button></li>' +
-                        '<li><button onclick="applyFilter(\'Jenis C\')">Jenis C</button></li>' +
-                        '</ul>',
-                    showConfirmButton: false
-                });
-            }
-
-            function applyFilter(filter) {
-                Swal.fire({
-                    icon: 'success',
-                    title: `Filter applied: ${filter}`,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }
+                // Function to show the Kategori filter modal
+                function showFilterKategori() {
+                    Swal.fire({
+                        title: 'Filter by Kategori',
+                        html: 
+                            '<ul style="list-style: none; padding: 0;">' +
+                            @foreach ($categories as $c)
+                                '<li><button class="mb-3 btn btn-primary" onclick="applyFilter(\'/admin/product?filter={{ $c->id }}\')">Kategori {{ $c->name }}</button></li>' +
+                            @endforeach
+                            '</ul>',
+                        showConfirmButton: false
+                    });
+                }
+            
+                // Function to show the Jenis filter modal
+                function showFilterJenis() {
+                    Swal.fire({
+                        title: 'Filter by Jenis',
+                        html:
+                            '<ul style="list-style: none; padding: 0;">' +
+                            @foreach ($types as $t)
+                                '<li><button class="mb-3 btn btn-primary" onclick="applyFilter(\'/admin/product?filter={{ $t->id }}\')">Jenis {{ $t->name }}</button></li>' +
+                            @endforeach
+                            '</ul>',
+                        showConfirmButton: false
+                    });
+                }
+            
+                // Function to apply the selected filter
+                function applyFilter(filterUrl) {
+                    // Redirect the page to the filter URL
+                    window.location.href = filterUrl;
+                }
             </script>
+            
             
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
                 <i class="material-symbols-rounded">add</i> &nbsp;Add Product</button>

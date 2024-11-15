@@ -10,12 +10,29 @@ use Illuminate\Support\Facades\Storage;
 
 class KProductController extends Controller
 {
-    public function index (){
-        $data = ProdukM::all();
-        $types= JenisM::all();
-        $categories= KategoriM::all();
-        return view('pages.admin.k-produk.index',compact('data','types','categories'));
+    public function index(Request $request) {
+        // Retrieve the search filter from the URL query parameter (either category or type)
+        $filter = $request->get('filter'); // Get the filter parameter from URL
+    
+        // Fetch categories and types
+        $types = JenisM::all();
+        $categories = KategoriM::all();
+    
+        // Fetch data based on the filter
+        if ($filter) {
+            // Apply the filter to the query
+            $data = ProdukM::where('kategori_id', $filter) // Filter by category name
+                            ->orWhere('jenis_id', $filter) // Filter by jenis name
+                            ->get();
+        } else {
+            // Fetch all data if no filter is applied
+            $data = ProdukM::all();
+        }
+    
+        // Return the view with the data
+        return view('pages.admin.k-produk.index', compact('data', 'types', 'categories'));
     }
+    
 
     public function store(Request $request)
 {
@@ -154,6 +171,32 @@ class KProductController extends Controller
 
         // Redirect back or to the product list page
         return redirect()->back()->with('success', 'Product deleted successfully.');
+    }
+
+    public function kategori(Request $request){
+
+        $kategori = new KategoriM();
+        $kategori->name = $request->nama_kategori;
+        $kategori->deskripsi = $request->deskripsi_kategori;
+        $kategori->save();
+
+        return redirect()->back()->with('success', 'Kategori Telah Ditambahkan');
+        
+    }
+
+    public function kategori_delete($id){
+        $data = KategoriM::find($id);
+        $data->delete();
+        return redirect()->back()->with('success', 'Kategori Telah Dihapus');
+
+    }
+    public function jenis(Request $request){
+        $jenia = new JenisM();
+        $jenia->name = $request->nama_jenis;
+        $jenia->deskripsi = $request->deskripsi_jenis;
+        $jenia->save();
+
+        return redirect()->back()->with('success', 'Jenis Telah Ditambahkan');
     }
 
 }

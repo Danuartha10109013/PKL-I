@@ -3,10 +3,12 @@
 use App\Http\Controllers\DashboardControlller;
 use App\Http\Controllers\KadminController;
 use App\Http\Controllers\KPembeliController;
+use App\Http\Controllers\KPesananController;
 use App\Http\Controllers\KProductController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
 use App\Http\Middleware\AutoLogout;
@@ -18,11 +20,21 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
 Route::post('/login-proses', [LoginController::class, 'proses'])->name('login-proses');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
+//Produk
 Route::get('/product', [LandingController::class, 'product'])->name('product');
+Route::get('/product/wa/{id}', [ProdukController::class, 'form'])->name('product.whatsapp');
+Route::post('/product/send', [ProdukController::class, 'send'])->name('product.whatsapp.send');
+
+//Customer
 Route::get('/customer', [LandingController::class, 'customer'])->name('customer');
+
+//Testimoni
 Route::get('/testimoni', [LandingController::class, 'testimoni'])->name('testimoni');
+
+//Kontak
 Route::get('/kontak', [LandingController::class, 'kontak'])->name('kontak');
+
+//About
 Route::get('/about', [LandingController::class, 'about'])->name('about');
 
 Route::middleware([AutoLogout::class])->group(function () {
@@ -51,6 +63,7 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::get('/',[KProductController::class, 'index'])->name('product');
             Route::post('/store',[KProductController::class, 'store'])->name('product.store');
             Route::post('/kategori',[KProductController::class, 'kategori'])->name('product.kategori');
+            Route::delete('/kategori/delete/{id}',[KProductController::class, 'kategori_delete'])->name('product.kategori.delete');
             Route::post('/jenis',[KProductController::class, 'jenis'])->name('product.jenis');
             Route::get('/edit/{id}',[KProductController::class, 'edit'])->name('product.edit');
             Route::put('/update/{id}',[KProductController::class, 'update'])->name('product.update');
@@ -61,7 +74,9 @@ Route::middleware([AutoLogout::class])->group(function () {
 
         });
         Route::prefix('pemesanan')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('pemesanan');
+            Route::get('/',[KPesananController::class, 'index'])->name('pemesanan');
+            Route::post('/active/{id}',[KPesananController::class, 'active'])->name('pemesanan.active');
+            Route::get('/message/{id}',[KPesananController::class, 'message'])->name('pemesanan.message');
 
         });
         Route::prefix('slider')->group(function () {
