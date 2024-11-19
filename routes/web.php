@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\DashboardControlller;
+use App\Http\Controllers\KAboutController;
 use App\Http\Controllers\KadminController;
+use App\Http\Controllers\KCustomerController;
 use App\Http\Controllers\KPembeliController;
 use App\Http\Controllers\KPesananController;
 use App\Http\Controllers\KProductController;
+use App\Http\Controllers\KTestimoniController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesananController;
@@ -77,14 +80,17 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::get('/',[KPesananController::class, 'index'])->name('pemesanan');
             Route::post('/active/{id}',[KPesananController::class, 'active'])->name('pemesanan.active');
             Route::get('/message/{id}',[KPesananController::class, 'message'])->name('pemesanan.message');
-
+            
         });
         Route::prefix('slider')->group(function () {
             Route::get('/',[KPembeliController::class, 'index'])->name('slider');
-
+            
         });
         Route::prefix('customer')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('customer');
+            Route::get('/',[KCustomerController::class, 'index'])->name('customer');
+            Route::post('/store',[KCustomerController::class, 'store'])->name('k-customer.store');
+            Route::put('/update/{id}',[KCustomerController::class, 'update'])->name('k-customer.update');
+            Route::delete('/delete/{id}',[KCustomerController::class, 'delete'])->name('k-customer.delete');
 
         });
         Route::prefix('project')->group(function () {
@@ -92,7 +98,10 @@ Route::middleware([AutoLogout::class])->group(function () {
 
         });
         Route::prefix('testimoni')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('testimoni');
+            Route::get('/',[KTestimoniController::class, 'index'])->name('testimoni');
+            Route::post('/store',[KTestimoniController::class, 'store'])->name('testimoni.store');
+            Route::put('/update/{id}',[KTestimoniController::class, 'update'])->name('testimoni.update');
+            Route::delete('/delete/{id}',[KTestimoniController::class, 'delete'])->name('testimoni.delete');
 
         });
         Route::prefix('kontak')->group(function () {
@@ -108,7 +117,8 @@ Route::middleware([AutoLogout::class])->group(function () {
 
         });
         Route::prefix('about')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('about');
+            Route::get('/',[KAboutController::class, 'index'])->name('about');
+            Route::put('update/{id}',[KAboutController::class, 'update'])->name('about.update');
 
         });
 

@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul style="font-size: 16px" class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('landing-page') ? 'active' : '' }}" href="{{ route('landing-page') }}" aria-current="page">Home</a>
+                    <a class="nav-link {{ Route::is('landing-page') ? 'active' : '' }}" href="{{ route('landing-page') }}" aria-current="page">Beranda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('product') ? 'active' : '' }}" href="{{route('product')}}">Produk Gallery</a>
@@ -39,7 +39,7 @@
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('about') ? 'active' : '' }}" href="{{ route('about') }}">About Us</a>
+                    <a class="nav-link {{ Route::is('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang Kami</a>
                 </li>
             </ul>
         </div>

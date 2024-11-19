@@ -29,7 +29,102 @@ PT. Trisurya Solusindo Utama || Main Pages
                     <div class="profile bg-gradient-primary-to-secondary">
                         <!-- TIP: For best results, use a photo with a transparent background like the demo example below-->
                         <!-- Watch a tutorial on how to do this on YouTube (link)-->
-                        <img class="profile-img" src="{{asset('vendor1')}}/assets/profile.png" alt="..." />
+                        <style>
+                            /* Slider container */
+                            .slider {
+                                position: relative;
+                                width: 50%;
+                                margin: auto;
+                                overflow: hidden;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center; /* Center images vertically */
+                                height: 400px; /* Set a fixed height */
+                            }
+                    
+                            /* Image styling */
+                            .slider img {
+                                width: 100%;
+                                max-height: 100%; /* Ensure the images fit within the container */
+                                object-fit: contain; /* Maintain aspect ratio and avoid stretching */
+                                transition: opacity 1s ease-in-out; /* Smooth transition for image change */
+                            }
+                    
+                            /* Controls styling */
+                            .controls {
+                                position: absolute;
+                                top: 50%;
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                transform: translateY(-50%);
+                            }
+                    
+                            .prev, .next {
+                                background-color: rgba(0, 0, 0, 0.5);
+                                color: white;
+                                border: none;
+                                padding: 10px;
+                                cursor: pointer;
+                                font-size: 24px;
+                            }
+                    
+                            .prev:hover, .next:hover {
+                                background-color: rgba(0, 0, 0, 0.8);
+                            }
+                    
+                            /* Hide previous/next buttons when not needed */
+                            .controls button {
+                                display: block;
+                            }
+                        </style>
+                    
+                        <div class="slider" id="imageSlider">
+                            <img class="mt-5" src="{{ asset('vendor1/assets/profile.png') }}" alt="Profile Image" id="sliderImage">
+                            <div class="controls">
+                                <button class="prev" id="prevBtn">&lt;</button>
+                                <button class="next" id="nextBtn">&gt;</button>
+                            </div>
+                        </div>
+                        
+                        <script>
+                            let currentIndex = 0;
+                            const images = [
+                                "{{ asset('vendor1/assets/profile.png') }}", // Add more images to the array as needed
+                                "{{ asset('vendor1/assets/balance.png') }}", // Add more images to the array as needed
+                            ];
+                        
+                            const sliderImage = document.getElementById('sliderImage');
+                            const prevBtn = document.getElementById('prevBtn');
+                            const nextBtn = document.getElementById('nextBtn');
+                        
+                            // Update the image displayed in the slider
+                            function updateSlider() {
+                                sliderImage.style.opacity = 0; // Fade out the current image
+                                setTimeout(() => {
+                                    sliderImage.src = images[currentIndex]; // Change image after fade-out
+                                    sliderImage.style.opacity = 1; // Fade in the new image
+                                }, 500); // Wait for fade-out duration before changing the image
+                            }
+                        
+                            // Show the previous image
+                            prevBtn.addEventListener('click', function() {
+                                currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+                                updateSlider();
+                            });
+                        
+                            // Show the next image
+                            nextBtn.addEventListener('click', function() {
+                                currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+                                updateSlider();
+                            });
+                        
+                            // Automatic sliding every 3 seconds
+                            setInterval(function() {
+                                currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+                                updateSlider();
+                            }, 10000); // 3000ms = 3 seconds
+                        </script>
                         <div class="dots-1">
                             <!-- SVG Dots-->
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 191.6 1215.4" style="enable-background: new 0 0 191.6 1215.4" xml:space="preserve">

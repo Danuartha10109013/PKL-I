@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutM;
+use App\Models\CustomerM;
 use App\Models\KategoriM;
 use App\Models\ProdukM;
+use App\Models\TestimoniM;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -35,11 +38,13 @@ class LandingController extends Controller
 
     public function customer(Request $request)
     {
-        return view('pages.customer.index');
+        $data = CustomerM::where('status', 1)->get();
+        return view('pages.customer.index',compact('data'));
     }
     public function testimoni(Request $request)
     {
-        return view('pages.testimoni.index');
+        $testimonials = TestimoniM::all();
+        return view('pages.testimoni.index',compact('testimonials'));
     }
     public function kontak(Request $request)
     {
@@ -47,7 +52,8 @@ class LandingController extends Controller
     }
     public function about(Request $request)
     {
-        return view('pages.about.index');
+        $data = AboutM::find(1);
+        return view('pages.about.index',compact('data'));
     }
 
 
