@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\AboutM;
 use App\Models\CustomerM;
 use App\Models\KategoriM;
+use App\Models\KontakM;
 use App\Models\ProdukM;
+use App\Models\SliderM;
 use App\Models\TestimoniM;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,9 @@ class LandingController extends Controller
 {
     public function index(Request $request)
     {
-        return view('pages.landing-page');
+        $slides = SliderM::all();
+        $data = ProdukM::where('rekomendasi',1)->get();
+        return view('pages.landing-page',compact('slides','data'));
     }
     public function product(Request $request)
     {
@@ -48,9 +52,17 @@ class LandingController extends Controller
     }
     public function kontak(Request $request)
     {
-        return view('pages.kontak.index');
+        $data = KontakM::all();
+        $a = AboutM::find(1);
+        $link_map = $a->link_map;
+        return view('pages.kontak.index',compact('data','link_map'));
     }
     public function about(Request $request)
+    {
+        $data = AboutM::find(1);
+        return view('pages.about.index',compact('data'));
+    }
+    public function project(Request $request)
     {
         $data = AboutM::find(1);
         return view('pages.about.index',compact('data'));

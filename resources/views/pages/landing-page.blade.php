@@ -4,7 +4,9 @@ PT. Trisurya Solusindo Utama || Main Pages
 @endsection
 @section('content')
 <!-- Header-->
-<header class="py-5">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" rel="stylesheet">
+
+<header class="py-5" data-aos="fade-down">
     <div class="container px-5 pb-5">
         <div class="row gx-5 align-items-center">
             <div class="col-xxl-5">
@@ -80,7 +82,7 @@ PT. Trisurya Solusindo Utama || Main Pages
                         </style>
                     
                         <div class="slider" id="imageSlider">
-                            <img class="mt-5" src="{{ asset('vendor1/assets/profile.png') }}" alt="Profile Image" id="sliderImage">
+                            <img class="mt-5" src="{{ asset('TSR1.png') }}" alt="Profile Image" id="sliderImage">
                             <div class="controls">
                                 <button class="prev" id="prevBtn">&lt;</button>
                                 <button class="next" id="nextBtn">&gt;</button>
@@ -90,8 +92,9 @@ PT. Trisurya Solusindo Utama || Main Pages
                         <script>
                             let currentIndex = 0;
                             const images = [
-                                "{{ asset('vendor1/assets/profile.png') }}", // Add more images to the array as needed
-                                "{{ asset('vendor1/assets/balance.png') }}", // Add more images to the array as needed
+                                @foreach ($slides as $slider)
+                                "{{ asset('storage/slider/'.$slider->image) }}", // Add more images to the array as needed
+                                @endforeach
                             ];
                         
                             const sliderImage = document.getElementById('sliderImage');
@@ -123,7 +126,7 @@ PT. Trisurya Solusindo Utama || Main Pages
                             setInterval(function() {
                                 currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
                                 updateSlider();
-                            }, 10000); // 3000ms = 3 seconds
+                            }, 5000); // 3000ms = 3 seconds
                         </script>
                         <div class="dots-1">
                             <!-- SVG Dots-->
@@ -244,22 +247,165 @@ PT. Trisurya Solusindo Utama || Main Pages
     </div>
 </header>
 <!-- About Section-->
-<section class="bg-light py-5">
+<section class="bg-light py-5" data-aos="fade-up">
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-xxl-8">
                 <div class="text-center my-5">
-                    <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">About Me</span></h2>
-                    <p class="lead fw-light mb-4">My name is Start Bootstrap and I help brands grow.</p>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dolorum itaque qui unde quisquam consequatur autem. Eveniet quasi nobis aliquid cumque officiis sed rem iure ipsa! Praesentium ratione atque dolorem?</p>
-                    <div class="d-flex justify-content-center fs-2 gap-4">
-                        <a class="text-gradient" href="#!"><i class="bi bi-twitter"></i></a>
-                        <a class="text-gradient" href="#!"><i class="bi bi-linkedin"></i></a>
-                        <a class="text-gradient" href="#!"><i class="bi bi-github"></i></a>
-                    </div>
+                    <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Rekomendasi Produk</span></h2>
+                    <p class="lead fw-light mb-4">This Is Are The Product Recomendation On PT. Trisurya Solusi Indonesia</p>
+                    <section class="py-5">
+                        <div class=" px-4 px-lg-5">
+                            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                                @foreach ($data as $d)
+                                    <div class="col mb-5">
+                                        <div class="card h-100 shadow-sm border-0">
+                                            <!-- Product image carousel -->
+                                            @if($d->gambar)
+                                                @php
+                                                    $images = json_decode($d->gambar);
+                                                @endphp
+                                                <div id="carousel{{ $d->id }}" class="carousel slide" data-bs-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        @foreach ($images as $index => $image)
+                                                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                <img src="{{ Storage::url($image) }}" class="d-block w-100 card-img-top" style="object-fit: cover; height: 250px;" alt="Product Image">
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ $d->id }}" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ $d->id }}" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                            <!-- Product details -->
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title fw-bold mb-2">{{ $d->name }}</h5>
+                                                <p class="text-muted mb-1">Rp. {{ number_format($d->harga, 0, ',', '.') }}</p>
+                                                <p class="card-text">{{ \Illuminate\Support\Str::limit($d->deskripsi, 20, '...') }}</p>
+                                            </div>
+                                            <!-- Product actions -->
+                                            <div class="card-footer bg-transparent border-top-0">
+                                                <!-- Button to trigger the modal -->
+                                                <a href="#" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#productModal-{{ $d->id }}">Lihat Produk</a>
+                
+                                                <!-- Fullscreen Modal -->
+                                                <div class="modal fade" id="productModal-{{ $d->id }}" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-fullscreen">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="productModalLabel">Product Name : {{ $d->name }}</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Carousel for product images -->
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        @if($d->gambar)
+                                                                            @php
+                                                                                $images = json_decode($d->gambar); // Decode the JSON string into an array
+                                                                            @endphp
+                                                                            <div id="carousel{{ $d->id }}" class="carousel slide" data-bs-ride="carousel">
+                                                                                <div class="carousel-inner">
+                                                                                    @foreach ($images as $index => $image)
+                                                                                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                                            <img src="{{ Storage::url($image) }}" class="d-block w-100" alt="Product Image">
+                                                                                        </div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                                <!-- Carousel Controls -->
+                                                                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ $d->id }}" data-bs-slide="prev">
+                                                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                    <span class="visually-hidden">Previous</span>
+                                                                                </button>
+                                                                                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ $d->id }}" data-bs-slide="next">
+                                                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                    <span class="visually-hidden">Next</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        @endif
+                                                                    </div>
+                                                            
+                                                                    <!-- Product Information Section -->
+                                                                    <div class="col-md-6">
+                                                                        <div class="container">
+                                                                            <div class="row">
+                                                                                <!-- Product Description -->
+                                                                                <div class="col-12 col-lg-8">
+                                                                                    <div class="mt-4">
+                                                                                        <h4 class="fw-bold text-dark">Description</h4>
+                                                                                        <p class="text-muted">{{ $d->deskripsi }}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                            
+                                                                                <!-- Price and Specifications Section -->
+                                                                                <div class="col-12 col-lg-4">
+                                                                                    <!-- Product Price -->
+                                                                                    <div class="card border-0 shadow-sm mb-4">
+                                                                                        <div class="card-body">
+                                                                                            <h5 class="text-success fw-bold" style="font-size: 1.5rem;">${{ number_format($d->harga, 2) }}</h5>
+                                                                                            <p class="text-muted">Price</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                            
+                                                                                    <!-- Product Specifications -->
+                                                                                    @if($d->sfesifikasi)
+                                                                                        @php
+                                                                                            $specifications = json_decode($d->sfesifikasi);
+                                                                                        @endphp
+                                                                                        <div class="card border-0 shadow-sm">
+                                                                                            <div class="card-body">
+                                                                                                <h5 class="fw-bold">Specifications</h5>
+                                                                                                <ul class="list-group list-group-flush">
+                                                                                                    @foreach ($specifications as $value)
+                                                                                                    <li class="list-group-item">
+                                                                                                        <strong><i class="fa-solid fa-check fw-bold" style="color: #007bff;"></i></strong> {{ $value }}
+                                                                                                    </li>
+                                                                                                    
+                                                                                                    @endforeach
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 text-center">
+                                                                                <a href="{{route('product.whatsapp',$d->id)}}" class="btn btn-success"><i class="fa-brands fa-whatsapp"></i> Pesan Sekarang</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1200, // Animation duration
+    });
+</script>
 @endsection

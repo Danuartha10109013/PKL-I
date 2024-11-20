@@ -18,10 +18,13 @@
                     <a class="nav-link {{ Route::is('customer') ? 'active' : '' }}" href={{route('customer')}}>Customer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('testimoni') ? 'active' : '' }}" href={{route('testimoni')}}>Testimoni</a>
+                    <a class="nav-link {{ Route::is('testimoni') ? 'active' : '' }}" href={{route('testimoni')}}>Rating</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('kontak') ? 'active' : '' }}" href="{{route('kontak')}}">Kontak</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('project') ? 'active' : '' }}" href="{{route('project')}}">Project</a>
                 </li>
                 @if (Auth::user())
                     <li class="nav-item">

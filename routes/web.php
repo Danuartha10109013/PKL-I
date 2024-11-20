@@ -4,9 +4,12 @@ use App\Http\Controllers\DashboardControlller;
 use App\Http\Controllers\KAboutController;
 use App\Http\Controllers\KadminController;
 use App\Http\Controllers\KCustomerController;
+use App\Http\Controllers\KKontakController;
 use App\Http\Controllers\KPembeliController;
 use App\Http\Controllers\KPesananController;
 use App\Http\Controllers\KProductController;
+use App\Http\Controllers\KRekomendasiController;
+use App\Http\Controllers\KSliderController;
 use App\Http\Controllers\KTestimoniController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
@@ -39,6 +42,9 @@ Route::get('/kontak', [LandingController::class, 'kontak'])->name('kontak');
 
 //About
 Route::get('/about', [LandingController::class, 'about'])->name('about');
+
+//project
+Route::get('/project', [LandingController::class, 'project'])->name('project');
 
 Route::middleware([AutoLogout::class])->group(function () {
 
@@ -73,7 +79,9 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::delete('/delete/{id}',[KProductController::class, 'delete'])->name('product.delete');
         });
         Route::prefix('rekomendasi')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('rekomendasi');
+            Route::get('/',[KRekomendasiController::class, 'index'])->name('rekomendasi');
+            Route::post('/active/{id}',[KRekomendasiController::class, 'active'])->name('k-rekomendasi.active');
+            Route::post('/nonactive/{id}',[KRekomendasiController::class, 'nonactive'])->name('k-rekomendasi.nonactive');
 
         });
         Route::prefix('pemesanan')->group(function () {
@@ -83,7 +91,9 @@ Route::middleware([AutoLogout::class])->group(function () {
             
         });
         Route::prefix('slider')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('slider');
+            Route::get('/',[KSliderController::class, 'index'])->name('slider');
+            Route::post('/store',[KSliderController::class, 'store'])->name('k-slider.store');
+            Route::delete('/delete/{id}',[KSliderController::class, 'delete'])->name('k-slider.delete');
             
         });
         Route::prefix('customer')->group(function () {
@@ -105,7 +115,10 @@ Route::middleware([AutoLogout::class])->group(function () {
 
         });
         Route::prefix('kontak')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('kontak');
+            Route::get('/',[KKontakController::class, 'index'])->name('kontak');
+            Route::post('/store',[KKontakController::class, 'store'])->name('k-kontak.store');
+            Route::put('/update/{id}',[KKontakController::class, 'update'])->name('k-kontak.update');
+            Route::delete('/delete/{id}',[KKontakController::class, 'delete'])->name('k-kontak.delete');
 
         });
         Route::prefix('rating')->group(function () {
