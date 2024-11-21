@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutM;
 use App\Models\PesananM;
 use App\Models\ProdukM;
 use Illuminate\Http\Request;
@@ -46,9 +47,10 @@ class ProdukController extends Controller
         $produk = ProdukM::find($pesanan->product_id);
 
         // WhatsApp message format
-    
+        $profile = AboutM::find(1);
+        
         // Nomor telepon harus dalam format internasional
-        $nomor = '6282119072382'; // Ganti 0821 menjadi 62821 (62 adalah kode negara Indonesia)
+        $nomor = $profile->hotline; // Ganti 0821 menjadi 62821 (62 adalah kode negara Indonesia)
         
         // Pesan WhatsApp
         $message = urlencode("Saya {$pesanan->name} dari {$pesanan->company_name} sangat tertarik dan ingin membeli produk dari PT. Trisurya Solusi Indo. Nama Produk: {$produk->name}");
