@@ -82,7 +82,7 @@ PT. Trisurya Solusindo Utama || Main Pages
                         </style>
                     
                         <div class="slider" id="imageSlider">
-                            <img class="mt-5" src="{{ asset('TSR1.png') }}" alt="Profile Image" id="sliderImage">
+                            <img class="mt-5" src="{{ asset('slider.jpg') }}" alt="Profile Image" id="sliderImage">
                             <div class="controls">
                                 <button class="prev" id="prevBtn">&lt;</button>
                                 <button class="next" id="nextBtn">&gt;</button>
