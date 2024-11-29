@@ -18,7 +18,6 @@
                         <th>Company Name</th>
                         <th>Image</th>
                         <th>Active</th>
-                        <th>Link</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -32,7 +31,6 @@
                             <img src="{{ asset('storage/' . $d->logo) }}" width="30%" alt="{{ $d->logo }}">
                         </td>
                         <td class="align-middle">&nbsp;&nbsp;&nbsp;&nbsp;{{ $d->status == 1 ? 'Active' : 'Inactive' }}</td>
-                        <td class="align-middle">&nbsp;&nbsp;&nbsp;&nbsp;{{ $d->link }}</td>
                         <td class="align-middle">
                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $d->id }}">Edit</button>
                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal{{ $d->id }}">Delete</button>
@@ -72,11 +70,7 @@
                                                 <option value="0" {{ $d->status == 0 ? 'selected' : '' }}>Inactive</option>
                                             </select>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="link" class="form-label">link</label>
-                                            <input type="link" class="form-control" name="link" value="{{ $d->link }}" style="outline: none; border: 1px solid #ccc;"onfocus="this.style.outline='3px solid red';" 
-                                            onblur="this.style.outline='none';" required>
-                                        </div>
+                                        
                                         <div class="mb-3">
                                             <label for="Logo" class="form-label">Logo</label>
                                             <input type="file" class="form-control mb-2" style="outline: none; border: 1px solid #ccc;"onfocus="this.style.outline='3px solid red';" 
@@ -160,11 +154,7 @@
                         <input type="file" class="form-control" name="logo" style="outline: none; border: 1px solid #ccc;"onfocus="this.style.outline='3px solid red';" 
                         onblur="this.style.outline='none';"  required>
                     </div>
-                    <div class="mb-3">
-                        <label for="link" class="form-label">Link</label>
-                        <input type="link" class="form-control" name="link" style="outline: none; border: 1px solid #ccc;"onfocus="this.style.outline='3px solid red';" 
-                        onblur="this.style.outline='none';"  required>
-                    </div>
+                    
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Add Customer</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

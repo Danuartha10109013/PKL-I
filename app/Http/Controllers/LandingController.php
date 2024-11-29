@@ -7,6 +7,7 @@ use App\Models\CustomerM;
 use App\Models\KategoriM;
 use App\Models\KontakM;
 use App\Models\ProdukM;
+use App\Models\ProjectM;
 use App\Models\SliderM;
 use App\Models\TestimoniM;
 use Illuminate\Http\Request;
@@ -64,8 +65,8 @@ class LandingController extends Controller
     }
     public function project(Request $request)
     {
-        $data = AboutM::find(1);
-        return view('pages.about.index',compact('data'));
+        $data = ProjectM::all();
+        return view('pages.project.index',compact('data'));
     }
 
 

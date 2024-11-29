@@ -9,6 +9,7 @@
             <h4>Kelola Pembeli</h4>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
         </div>
+        <p>Password automaticly is "<strong>Trisurya</strong>"</p>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -61,6 +62,22 @@
                                             <select class="form-control" name="active" required>
                                                 <option value="1" {{ $d->active == 1 ? 'selected' : '' }}>Active</option>
                                                 <option value="0" {{ $d->active == 0 ? 'selected' : '' }}>Inactive</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                        <label for="active" class="form-label">Product</label>
+                                            <select class="form-control" name="product" required>
+                                                <option value="" disabled>--Select Product--</option>
+                                                @php
+                                                    $ids = \App\Models\PembelianM::where('user_id',$d->id)->value('product_id');
+                                                    $produk = \App\Models\ProdukM::all();
+                                                    // dd($ids);
+                                                @endphp
+                                                @foreach ($produk as $p)
+                                                    <option value="{{ $p->id }}" {{ $p->id == $ids ? 'selected' : '' }}>
+                                                        {{ $p->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-3">
@@ -137,12 +154,24 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="active" class="form-label">Product</label>
+                        <select class="form-control" name="product" required>
+                            <option value="" selected disabled>--Select Product--</option>
+                            @php
+                                $produk = \App\Models\ProdukM::all();
+                            @endphp
+                            @foreach ($produk as $p)
+                            <option value="{{$p->id}}">{{$p->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" required>
+                        <input type="password" class="form-control" name="password" >
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Add User</button>

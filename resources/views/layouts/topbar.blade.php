@@ -27,9 +27,7 @@
                     <a class="nav-link {{ Route::is('project') ? 'active' : '' }}" href="{{route('project')}}">Project</a>
                 </li>
                 @if (Auth::user())
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('pembeli.rating') ? 'active' : '' }}" href="{{route('pembeli.rating')}}">Berikan Rating</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('pembeli.pesanan') ? 'active' : '' }}" href="{{route('pembeli.pesanan')}}">Pesanan</a>
                     </li>

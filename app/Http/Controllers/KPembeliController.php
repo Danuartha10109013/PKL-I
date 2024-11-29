@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PembelianM;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,17 +21,38 @@ class KPembeliController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'active' => 'required|boolean',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
+            'password' => 'nullable|string|min:8',
+            'product' => 'required',
 
-        User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'role' => 1,
-            'active' => $request->active,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
         ]);
+        if($request->password == null){
+            $user = new User();
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->role = 1;
+            $user->active = $request->active;
+            $user->email = $request->email;
+            $user->password = Hash::make("Trisurya");
+            $user->save();
+            $jadi = new PembelianM();
+            $jadi->product_id = $request->product;
+            $jadi->user_id = $user->id;
+            $jadi->save();
+        }else{
+            $user = new User();
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->role = 1;
+            $user->active = $request->active;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            $jadi = new PembelianM();
+            $jadi->product_id = $request->product;
+            $jadi->user_id = $user->id;
+            $jadi->save();
+        }
+
 
         return redirect()->back()->with('success', 'User added successfully.');
     }

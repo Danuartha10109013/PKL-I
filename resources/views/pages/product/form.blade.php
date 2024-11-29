@@ -38,7 +38,6 @@ PT. Trisurya Solusindo Utama || Pesan Product
                         <!-- Product details -->
                         <div class="card-body text-center">
                             <h5 class="card-title fw-bold mb-2">{{ $data->name }}</h5>
-                            <p class="text-muted mb-1">Rp. {{ number_format($data->harga, 0, ',', '.') }}</p>
                             <p class="card-text">{{ \Illuminate\Support\Str::limit($data->deskripsi, 20, '...') }}</p>
                         </div>
                         <!-- Product actions -->
@@ -51,17 +50,17 @@ PT. Trisurya Solusindo Utama || Pesan Product
                 </div>
                 <div class="col-md-4">
                     <div class="form-control mb-3">
-                        <label for="nama"><i class="fas fa-user"></i> Nama</label>
-                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama" required>
+                        <label for="nama"><i class="fas fa-user"></i> Nama </label>
+                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama" >
                     </div>
                     
                     <div class="form-control mb-3">
-                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan Email" required>
+                        <label for="email"><i class="fas fa-envelope"></i> Email </label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan Email" >
                     </div>
                     
                     <div class="form-control mb-3">
-                        <label for="no_whatsapp"><i class="fab fa-whatsapp"></i> No WhatsApp</label>
+                        <label for="no_whatsapp"><i class="fab fa-whatsapp"></i> No WhatsApp <small style="color: red">*</small></label>
                         <input type="text" name="no_whatsapp" class="form-control" id="no_whatsapp" placeholder="Masukkan No WhatsApp" required>
                     </div>
                 </div>
@@ -69,18 +68,18 @@ PT. Trisurya Solusindo Utama || Pesan Product
                 
                 <div class="col-md-4">
                     <div class="form-control mb-3">
-                        <label for="perusahaan"><i class="fas fa-building"></i> Perusahaan</label>
+                        <label for="perusahaan"><i class="fas fa-building"></i> Perusahaan <small style="color: red">*</small></label>
                         <input type="text" name="perusahaan" class="form-control" id="perusahaan" placeholder="Masukkan Nama Perusahaan" required>
                     </div>
                     
                     <div class="form-control mb-3">
-                        <label for="alamat"><i class="fas fa-map-marker-alt"></i> Alamat</label>
-                        <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Masukkan Alamat Perusahaan" required>
+                        <label for="alamat"><i class="fas fa-map-marker-alt"></i> Alamat </label>
+                        <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Masukkan Alamat Perusahaan" >
                     </div>
                     
                     <div class="form-control mb-3">
-                        <label for="email_perusahaan"><i class="fas fa-building"></i> Email Perusahaan</label>
-                        <input type="email" name="email_perusahaan" class="form-control" id="email_perusahaan" placeholder="Masukkan Email Perusahaan" required>
+                        <label for="email_perusahaan"><i class="fas fa-building"></i> Email Perusahaan </label>
+                        <input type="email" name="email_perusahaan" class="form-control" id="email_perusahaan" placeholder="Masukkan Email Perusahaan" >
                     </div>
                 </div>
                 

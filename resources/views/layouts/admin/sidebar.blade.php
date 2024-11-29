@@ -67,8 +67,8 @@
       </li>
       <li class="nav-item">
           <a class="nav-link {{ Route::is('admin.testimoni') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" href="{{ route('admin.testimoni') }}">
-              <i class="material-symbols-rounded opacity-5">interests</i>
-              <span class="nav-link-text ms-1">Testimoni</span>
+            <i class="material-symbols-rounded opacity-5">star_rate</i>
+            <span class="nav-link-text ms-1">Rating</span>
           </a>
       </li>
       <li class="nav-item">
@@ -77,12 +77,7 @@
               <span class="nav-link-text ms-1">Kontak</span>
           </a>
       </li>
-      <li class="nav-item">
-          <a class="nav-link {{ Route::is('admin.rating') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" href="{{ route('admin.rating') }}">
-              <i class="material-symbols-rounded opacity-5">star_rate</i>
-              <span class="nav-link-text ms-1">Rating</span>
-          </a>
-      </li>
+      
       <li class="nav-item">
           <a class="nav-link {{ Route::is('admin.pesanan') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" href="{{ route('admin.pesanan') }}">
               <i class="material-symbols-rounded opacity-5">assignment</i>

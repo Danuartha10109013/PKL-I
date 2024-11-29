@@ -56,7 +56,7 @@ class KTestimoniController extends Controller
             'company_logo' => $companyLogoName,  // Save the filename
         ]);
     
-        return redirect()->route('admin.testimoni')->with('success', 'Testimonial added successfully.');
+        return redirect()->back()->with('success', 'Thank you For your Response.');
     }
     
     public function update(Request $request, $id)

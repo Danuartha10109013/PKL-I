@@ -18,13 +18,13 @@ class ProdukController extends Controller
         // dd($request->all());
         // Validate the incoming data
         $validated = $request->validate([
-            'nama' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'nama' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
             'no_whatsapp' => 'required|string|max:20',
             'perusahaan' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'email_perusahaan' => 'required|email|max:255',
-            'prodct_id' => 'required|integer|exists:produk,id', 
+            'alamat' => 'nullable|string|max:255',
+            'email_perusahaan' => 'nullable|email|max:255',
+            'prodct_id' => 'nullable|integer|exists:produk,id', 
         ]);
 
         $orders = PesananM::where('email',$request->email)
@@ -53,7 +53,7 @@ class ProdukController extends Controller
         $nomor = $profile->hotline; // Ganti 0821 menjadi 62821 (62 adalah kode negara Indonesia)
         
         // Pesan WhatsApp
-        $message = urlencode("Saya {$pesanan->name} dari {$pesanan->company_name} sangat tertarik dan ingin membeli produk dari PT. Trisurya Solusi Indo. Nama Produk: {$produk->name}");
+        $message = urlencode("Saya dari {$pesanan->company_name} sangat tertarik dan ingin membeli produk dari PT. Trisurya Solusi Indo. Nama Produk: {$produk->name}");
         
         // URL WhatsApp
         $whatsappLink = "https://wa.me/{$nomor}?text={$message}";

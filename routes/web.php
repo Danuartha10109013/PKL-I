@@ -5,9 +5,11 @@ use App\Http\Controllers\KAboutController;
 use App\Http\Controllers\KadminController;
 use App\Http\Controllers\KCustomerController;
 use App\Http\Controllers\KKontakController;
+use App\Http\Controllers\KPembelianController;
 use App\Http\Controllers\KPembeliController;
 use App\Http\Controllers\KPesananController;
 use App\Http\Controllers\KProductController;
+use App\Http\Controllers\KProjectController;
 use App\Http\Controllers\KRekomendasiController;
 use App\Http\Controllers\KSliderController;
 use App\Http\Controllers\KTestimoniController;
@@ -104,7 +106,9 @@ Route::middleware([AutoLogout::class])->group(function () {
 
         });
         Route::prefix('project')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('project');
+            Route::get('/',[KProjectController::class, 'index'])->name('project');
+            Route::post('/store',[KProjectController::class, 'store'])->name('project.store');
+            Route::delete('/delete/{id}',[KProjectController::class, 'delete'])->name('project.delete');
 
         });
         Route::prefix('testimoni')->group(function () {
@@ -126,7 +130,8 @@ Route::middleware([AutoLogout::class])->group(function () {
 
         });
         Route::prefix('pesanan')->group(function () {
-            Route::get('/',[KPembeliController::class, 'index'])->name('pesanan');
+            Route::get('/',[KPembelianController::class, 'index'])->name('pesanan');
+            Route::put('/update/{id}',[KPembelianController::class, 'update'])->name('pesanan.update');
 
         });
         Route::prefix('about')->group(function () {
@@ -145,6 +150,9 @@ Route::middleware([AutoLogout::class])->group(function () {
         Route::prefix('pesanan')->group(function () {
             Route::get('/',[PesananController::class, 'index'])->name('pesanan');
 
+        });
+        Route::prefix('testimoni')->group(function () {
+            Route::post('/store',[KTestimoniController::class, 'store'])->name('testimoni.store');
         });
     });
 

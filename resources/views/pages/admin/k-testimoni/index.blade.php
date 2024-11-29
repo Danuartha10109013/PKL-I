@@ -142,8 +142,16 @@
                         <input type="text" class="form-control" name="company_name" required>
                     </div>
                     <div class="mb-3">
+                        @php
+                            $produks = \App\Models\ProdukM::all();
+                        @endphp
                         <label for="product_name" class="form-label">Product</label>
-                        <input type="text" class="form-control" name="product_name" required>
+                        <select type="text" class="form-control" name="product_name" required>
+                            <option value="" selected disabled>--Select Product--</option>
+                            @foreach ($produks as $produk)
+                            <option value="{{$produk->name}}">{{$produk->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="testimonial" class="form-label">Testimonial</label>

@@ -40,7 +40,6 @@ class KProductController extends Controller
         'kode_produk' => 'required|string|max:255',
         'name' => 'required|string|max:255',
         'deskripsi' => 'required|string',
-        'harga' => 'required|numeric',
         'sfesifikasi' => 'required|array', // Ensure this is an array
         'gambar' => 'required|array', // Ensure this is an array
         'gambar.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Each image file validation
@@ -67,7 +66,6 @@ class KProductController extends Controller
         'kode_produk' => $request->kode_produk,
         'name' => $request->name,
         'deskripsi' => $request->deskripsi,
-        'harga' => $request->harga,
         'sfesifikasi' => json_encode($request->sfesifikasi), // Encode specs as JSON
         'gambar' => json_encode($uploadedImages), // Encode image paths as JSON
         'jenis_id' => $request->jenis_id,
@@ -96,7 +94,6 @@ class KProductController extends Controller
             'sfesifikasi' => 'nullable|array',
             'gambar' => 'nullable|array',
             'gambar.*' => 'nullable',
-            'harga' => 'required|numeric',
             'jenis_id' => 'required|exists:jenis,id',
             'kategori_id' => 'required|exists:kategori,id',
             'delete_gambar' => 'nullable|array',

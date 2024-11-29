@@ -201,7 +201,6 @@
                         <th>Produk</th>
                         <th>Kategori</th>
                         <th>Jenis</th>
-                        <th>Harga</th>
                         <th>Spesifikasi</th>
                         <th>Gambar</th>
                         <th>Actions</th>
@@ -214,7 +213,6 @@
                         <td>{{ $d->name }}</td>
                         <td>{{ $d->kategori_id }}</td>
                         <td>{{ $d->jenis_id }}</td>
-                        <td>{{ $d->harga }}</td>
                         <td class="align-middle">
                             <!-- Slider for Images -->
                             @if($d->gambar)
@@ -332,7 +330,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Product Name</label>
-                                <input type="text" class="form-control" style="outline: 2px solid grey;" style="outline: 2px solid grey;" id="name" name="name" required>
+                                <input type="text" class="form-control" style="outline: 2px solid grey;"  id="name" name="name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Description</label>
@@ -361,11 +359,6 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="harga" class="form-label">Price</label>
-                                <input type="number" class="form-control" id="harga" style="outline: 2px solid grey;" name="harga" required>
-                            </div>
-                            
                             <div class="mb-3">
                                 <label for="jenis_id" class="form-label">Type</label>
                                 <select class="form-select" id="jenis_id" style="outline: 2px solid grey;" name="jenis_id" required>

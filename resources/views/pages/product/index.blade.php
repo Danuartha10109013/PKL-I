@@ -7,30 +7,19 @@ PT. Trisurya Solusindo Utama || Product
     <ol class="carousel-indicators">
         <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
         <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="{{asset('bgrr2.png')}}" alt="...">
+            <img class="d-block w-100" src="{{asset('bg1.png')}}" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Produk ICA</h5>
-                <p>Icain</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="{{asset('bgrr2.png')}}" alt="...">
+            <img class="d-block w-100" src="{{asset('bg2.png')}}" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Produk ICA</h5>
-                <p>Icain</p>
             </div>
         </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="{{asset('bgrr2.png')}}" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Produk ICA</h5>
-                <p>Icain</p>
-            </div>
-        </div>
+        
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -105,7 +94,6 @@ PT. Trisurya Solusindo Utama || Product
                             <!-- Product details -->
                             <div class="card-body text-center">
                                 <h5 class="card-title fw-bold mb-2">{{ $d->name }}</h5>
-                                <p class="text-muted mb-1">Rp. {{ number_format($d->harga, 0, ',', '.') }}</p>
                                 <p class="card-text">{{ \Illuminate\Support\Str::limit($d->deskripsi, 20, '...') }}</p>
                             </div>
                             <!-- Product actions -->
@@ -164,13 +152,7 @@ PT. Trisurya Solusindo Utama || Product
                                             
                                                                 <!-- Price and Specifications Section -->
                                                                 <div class="col-12 col-lg-4">
-                                                                    <!-- Product Price -->
-                                                                    <div class="card border-0 shadow-sm mb-4">
-                                                                        <div class="card-body">
-                                                                            <h5 class="text-success fw-bold" style="font-size: 1.5rem;">${{ number_format($d->harga, 2) }}</h5>
-                                                                            <p class="text-muted">Price</p>
-                                                                        </div>
-                                                                    </div>
+                                                                    
                                             
                                                                     <!-- Product Specifications -->
                                                                     @if($d->sfesifikasi)

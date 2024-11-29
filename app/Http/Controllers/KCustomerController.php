@@ -20,7 +20,6 @@ class KCustomerController extends Controller
         'company_name' => 'required|string|max:255',
         'status' => 'required|boolean',
         'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'link' => 'required',
     ]);
 
     // Handle the logo upload with the original name
@@ -52,7 +51,6 @@ class KCustomerController extends Controller
         'name' => 'required|string|max:255',
         'company_name' => 'required|string|max:255',
         'status' => 'required|boolean',
-        'link' => 'required',
         'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 

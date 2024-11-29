@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PembelianM;
 use App\Models\PesananM;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,6 +40,12 @@ class KPesananController extends Controller
         $user->active = 1;
         $user->password = Hash::make('Trisurya');
         $user->save();
+
+        $jadi = new PembelianM();
+        $jadi->user_id = $user->id;
+        $jadi->product_id = $id;
+        $jadi->save();
+
 
         return redirect()->back()->with('success', 'User Has Been Created');
     }
