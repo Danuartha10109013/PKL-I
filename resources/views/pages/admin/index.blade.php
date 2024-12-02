@@ -18,8 +18,11 @@ Dashboard
         <div class="card-header p-2 ps-3">
           <div class="d-flex justify-content-between">
             <div>
-              <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-              <h4 class="mb-0">$53k</h4>
+              <p class="text-sm mb-0 text-capitalize">Total Produk</p>
+              @php
+                $produk = \App\Models\ProdukM::all()->count();
+              @endphp
+              <h4 class="mb-0">{{$produk}}</h4>
             </div>
             <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
               <i class="material-symbols-rounded opacity-10">weekend</i>
@@ -28,7 +31,6 @@ Dashboard
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-2 ps-3">
-          <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+55% </span>than last week</p>
         </div>
       </div>
     </div>
@@ -37,8 +39,11 @@ Dashboard
         <div class="card-header p-2 ps-3">
           <div class="d-flex justify-content-between">
             <div>
-              <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-              <h4 class="mb-0">2300</h4>
+              <p class="text-sm mb-0 text-capitalize">Total Customer</p>
+              @php
+                $customer = \App\Models\CustomerM::all()->count();
+              @endphp
+              <h4 class="mb-0">{{$customer}}</h4>
             </div>
             <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
               <i class="material-symbols-rounded opacity-10">person</i>
@@ -47,7 +52,6 @@ Dashboard
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-2 ps-3">
-          <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+3% </span>than last month</p>
         </div>
       </div>
     </div>
@@ -56,8 +60,12 @@ Dashboard
         <div class="card-header p-2 ps-3">
           <div class="d-flex justify-content-between">
             <div>
-              <p class="text-sm mb-0 text-capitalize">Ads Views</p>
-              <h4 class="mb-0">3,462</h4>
+              <p class="text-sm mb-0 text-capitalize">Total Pemesan</p>
+              @php
+                $pemesan = \App\Models\PesananM::all()->count();
+                
+              @endphp
+              <h4 class="mb-0">{{$pemesan}}</h4>
             </div>
             <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
               <i class="material-symbols-rounded opacity-10">leaderboard</i>
@@ -66,7 +74,6 @@ Dashboard
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-2 ps-3">
-          <p class="mb-0 text-sm"><span class="text-danger font-weight-bolder">-2% </span>than yesterday</p>
         </div>
       </div>
     </div>
@@ -75,8 +82,12 @@ Dashboard
         <div class="card-header p-2 ps-3">
           <div class="d-flex justify-content-between">
             <div>
-              <p class="text-sm mb-0 text-capitalize">Sales</p>
-              <h4 class="mb-0">$103,430</h4>
+              <p class="text-sm mb-0 text-capitalize">Total Project</p>
+              @php
+              $project = \App\Models\ProjectM::all()->count();
+              
+            @endphp
+              <h4 class="mb-0">{{$project}}</h4>
             </div>
             <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
               <i class="material-symbols-rounded opacity-10">weekend</i>
@@ -85,7 +96,6 @@ Dashboard
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-2 ps-3">
-          <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+5% </span>than yesterday</p>
         </div>
       </div>
     </div>
@@ -94,17 +104,101 @@ Dashboard
     <div class="col-lg-4 col-md-6 mt-4 mb-4">
       <div class="card">
         <div class="card-body">
-          <h6 class="mb-0 ">Website Views</h6>
-          <p class="text-sm ">Last Campaign Performance</p>
+          <h6 class="mb-0 ">Pembelian</h6>
+          <p class="text-sm ">Performa Pembelian</p>
           <div class="pe-2">
             <div class="chart">
-              <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+              <canvas id="myChart" class="chart-canvas" height="170"></canvas>
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+              <script>
+                  // Data pembelian per bulan dari server
+                  const pembelianData = @json($pembelianPerBulan);
+
+                  // Label bulan
+                  const bulanLabels = [
+                      "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                      "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                  ];
+
+                  // Inisialisasi chart
+                  const ctx = document.getElementById('myChart').getContext('2d');
+                  new Chart(ctx, {
+                      type: "bar",
+                      data: {
+                          labels: bulanLabels, // Gunakan label bulan
+                          datasets: [{
+                              label: "Pembelian Per Bulan",
+                              tension: 0.4,
+                              borderWidth: 0,
+                              borderRadius: 4,
+                              borderSkipped: false,
+                              backgroundColor: "#43A047",
+                              data: pembelianData, // Data pembelian dari controller
+                              barThickness: 'flex'
+                          }],
+                      },
+                      options: {
+                          responsive: true,
+                          maintainAspectRatio: false,
+                          plugins: {
+                              legend: {
+                                  display: false,
+                              }
+                          },
+                          interaction: {
+                              intersect: false,
+                              mode: 'index',
+                          },
+                          scales: {
+                              y: {
+                                  grid: {
+                                      drawBorder: false,
+                                      display: true,
+                                      drawOnChartArea: true,
+                                      drawTicks: false,
+                                      borderDash: [5, 5],
+                                      color: '#e5e5e5'
+                                  },
+                                  ticks: {
+                                      suggestedMin: 0,
+                                      suggestedMax: 300,
+                                      beginAtZero: true,
+                                      padding: 10,
+                                      font: {
+                                          size: 14,
+                                          lineHeight: 2
+                                      },
+                                      color: "#737373"
+                                  },
+                              },
+                              x: {
+                                  grid: {
+                                      drawBorder: false,
+                                      display: false,
+                                      drawOnChartArea: false,
+                                      drawTicks: false,
+                                      borderDash: [5, 5]
+                                  },
+                                  ticks: {
+                                      display: true,
+                                      color: '#737373',
+                                      padding: 10,
+                                      font: {
+                                          size: 14,
+                                          lineHeight: 2
+                                      },
+                                  }
+                              },
+                          },
+                      },
+                  });
+              </script>
+
           </div>
           <hr class="dark horizontal">
           <div class="d-flex ">
-            <i class="material-symbols-rounded text-sm my-auto me-1">schedule</i>
-            <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
           </div>
         </div>
       </div>
