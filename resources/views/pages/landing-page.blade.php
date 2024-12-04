@@ -6,8 +6,8 @@ PT. Trisurya Solusindo Utama || Main Pages
 <!-- Header-->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" rel="stylesheet">
 
-<header class="py-5" data-aos="fade-down">
-    <div class="container px-5 pb-5">
+<header class="py-0 mt-5 mb-5" data-aos="fade-down">
+    <div class="container px-5 pb-0">
         <div class="row gx-5 align-items-center">
             <div class="col-xxl-5">
                 <!-- Header text content-->
@@ -16,8 +16,9 @@ PT. Trisurya Solusindo Utama || Main Pages
                     <h1 class="display-3 fw-bolder mb-1"><span class="text-gradient d-inline" style="font-size: 52px">PT. Trisurya Solusindo Utama</span></h1>
                     <div class="fs-3 fw-bold mb-2 text-muted" style="font-size:15px " >Weighing Solution and System Integration</div>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                        <form action="your_search_endpoint" method="GET" class="d-flex">
-                            <input type="search" placeholder="Search" aria-label="Search" class="form-control me-2">
+                        <form action="{{route('product')}}" method="GET" class="d-flex">
+                            <input type="hidden" name="category" value="{{ request('category') }}">
+                            <input type="search" placeholder="Search" name="search" aria-label="Search" class="form-control me-2">
                             <button class="btn btn-outline-dark" type="submit"><i class="mdi mdi-magnify"></i></button>
                         </form>
                     </div>
@@ -25,7 +26,7 @@ PT. Trisurya Solusindo Utama || Main Pages
                 </div>
                 <p>www.trisuryasolusindo.com|@reallygreatsite</p>
             </div>
-            <div class="col-xxl-7">
+            <div class="col-xxl-7 text-center">
                 <!-- Header profile picture-->
                 <div class="d-flex justify-content-center mt-3 mt-xxl-0">
                     <div class="profile bg-gradient-primary-to-secondary">
@@ -37,6 +38,7 @@ PT. Trisurya Solusindo Utama || Main Pages
                                 position: relative;
                                 width: 50%;
                                 margin: auto;
+                                margin-top: -4rem;
                                 overflow: hidden;
                                 display: flex;
                                 justify-content: center;
@@ -69,6 +71,8 @@ PT. Trisurya Solusindo Utama || Main Pages
                                 padding: 10px;
                                 cursor: pointer;
                                 font-size: 24px;
+                                margin-top: 3rem;
+                                opacity: 0.2;
                             }
                     
                             .prev:hover, .next:hover {
@@ -402,6 +406,12 @@ PT. Trisurya Solusindo Utama || Main Pages
         </div>
     </div>
 </section>
+
+<section class="container">
+    <img src="{{ asset('section.jpg') }}" alt="" data-aos="fade-up" data-aos-duration="1000">
+</section>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
 <script>
     AOS.init({

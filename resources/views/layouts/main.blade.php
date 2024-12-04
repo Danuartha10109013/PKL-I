@@ -17,6 +17,54 @@
     <link href="{{asset('vendor1')}}/css/styles.css" rel="stylesheet" />
 </head>
 <body class="d-flex flex-column h-100">
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <img src="{{ asset('TSR1.png') }}" alt="Loading" class="loading-logo">
+  </div>
+  <style>
+    /* Fullscreen loader */
+    .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff; /* or any background color you prefer */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Ensure it's above everything */
+    }
+
+    /* Logo animation */
+    .loading-logo {
+        width: 150px; /* Adjust size as needed */
+        animation: linear infinite; /* Infinite spinning */
+    }
+
+    /* Spin animation */
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+  </style>
+  <script>
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('loading-screen');
+        loader.style.transition = 'opacity 0.5s ease'; // Fade-out effect
+        loader.style.opacity = '0';
+
+        setTimeout(() => {
+            loader.style.display = 'none'; // Completely hide after fade-out
+        }, 500); // Match the fade-out duration
+    });
+  </script>
+
+
     <main class="flex-shrink-0">
         @include('layouts.topbar')
         
