@@ -143,36 +143,55 @@ PT. Trisurya Solusindo Utama || Product
                                                         <div class="container">
                                                             <div class="row">
                                                                 <!-- Product Description -->
-                                                                <div class="col-12 col-lg-8">
-                                                                    <div class="mt-4">
+                                                                <div class="col-12 col-lg-12 text-center">
+                                                                    <div class="mt-4 ">
                                                                         <h4 class="fw-bold text-dark">Description</h4>
                                                                         <p class="text-muted">{{ $d->deskripsi }}</p>
                                                                     </div>
-                                                                </div>
-                                            
-                                                                <!-- Price and Specifications Section -->
-                                                                <div class="col-12 col-lg-4">
-                                                                    
-                                            
                                                                     <!-- Product Specifications -->
                                                                     @if($d->sfesifikasi)
                                                                         @php
                                                                             $specifications = json_decode($d->sfesifikasi);
                                                                         @endphp
-                                                                        <div class="card border-0 shadow-sm">
-                                                                            <div class="card-body">
-                                                                                <h5 class="fw-bold">Specifications</h5>
-                                                                                <ul class="list-group list-group-flush">
-                                                                                    @foreach ($specifications as $value)
-                                                                                    <li class="list-group-item">
-                                                                                        <strong><i class="fa-solid fa-check fw-bold" style="color: #007bff;"></i></strong> {{ $value }}
-                                                                                    </li>
-                                                                                    
-                                                                                    @endforeach
-                                                                                </ul>
-                                                                            </div>
+                                                                        <h5 class="fw-bold">Specifications</h5>
+                                                                        @php
+                                                                        $columns = collect($specifications)->chunk(3); // Membagi array menjadi grup dengan 3 elemen per grup
+                                                                        @endphp
+                                                                        
+                                                                        <div class="row">
+                                                                            @foreach ($columns as $index => $group)
+                                                                                <div class="col-12 @if($columns->count() > 2 && $index == $columns->count() - 1) text-center @else col-md-6 @endif">
+                                                                                    <ul class="list-group list-group-flush" id="list-group-{{ $index }}">
+                                                                                        @foreach ($group as $value)
+                                                                                            <li class="list-group-item" >
+                                                                                                <strong><i class="fa-solid fa-check" style="color: #007bff; font-weight: bold;"></i></strong> {{ $value }}
+                                                                                            </li>
+                                                                                        @endforeach
+                                                                                    </ul>
+                                                                                </div>
+                                                                            @endforeach
                                                                         </div>
                                                                     @endif
+                                                                </div>
+                                            
+                                                                <!-- Price and Specifications Section -->
+                                                                <div class="col-12 col-lg-12 mt-3">
+                                                                    <div style="width: 100%; border: 1px solid #ccc; padding: 10px; box-sizing: border-box;">
+                                                                        <style>
+                                                                            table {
+                                                                                border-collapse: collapse;
+                                                                                width: 100%;
+                                                                            }
+                                                                            table, th, td {
+                                                                                outline: 1px solid grey;
+                                                                            }
+                                                                        </style>
+                                                                        {!! $d->detail !!}
+                                                                    </div>
+                                                                    
+                                                                    
+                                            
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>

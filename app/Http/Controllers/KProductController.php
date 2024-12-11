@@ -45,6 +45,7 @@ class KProductController extends Controller
         'gambar.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Each image file validation
         'jenis_id' => 'required|integer',
         'kategori_id' => 'required|integer',
+        'detail' => 'required',
     ]);
 
     // Initialize an array to store the relative paths of uploaded images
@@ -70,6 +71,7 @@ class KProductController extends Controller
         'gambar' => json_encode($uploadedImages), // Encode image paths as JSON
         'jenis_id' => $request->jenis_id,
         'kategori_id' => $request->kategori_id,
+        'detail' => $request->detail,
     ]);
 
         return redirect()->route('admin.product')->with('success', 'Product added successfully');
@@ -92,6 +94,7 @@ class KProductController extends Controller
             'name' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'sfesifikasi' => 'nullable|array',
+            'detail' => 'nullable',
             'gambar' => 'nullable|array',
             'gambar.*' => 'nullable',
             'jenis_id' => 'required|exists:jenis,id',
@@ -107,9 +110,9 @@ class KProductController extends Controller
         $product->kode_produk = $request->kode_produk;
         $product->name = $request->name;
         $product->deskripsi = $request->deskripsi;
-        $product->harga = $request->harga;
         $product->jenis_id = $request->jenis_id;
         $product->kategori_id = $request->kategori_id;
+        $product->detail = $request->detail;
 
         if ($request->has('sfesifikasi')) {
             // Filter out any null values

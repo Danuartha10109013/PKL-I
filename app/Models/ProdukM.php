@@ -20,5 +20,6 @@ class ProdukM extends Model
         'sfesifikasi',
         'jenis_id',
         'kategori_id',
+        'detail',
     ];
 }

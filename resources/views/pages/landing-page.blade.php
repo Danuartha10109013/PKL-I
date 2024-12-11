@@ -408,8 +408,30 @@ PT. Trisurya Solusindo Utama || Main Pages
 </section>
 
 <section class="container">
-    <img src="{{ asset('section.jpg') }}" alt="" data-aos="fade-up" data-aos-duration="1000">
+    <img src="{{ asset('section.png') }}" 
+         class="responsive-img" 
+         alt="" 
+         data-aos="fade-up" 
+         data-aos-duration="1000">
 </section>
+
+<style>
+.container {
+    max-width: 1200px; /* Adjust to your container's desired max width */
+    margin: 0 auto; /* Center the section */
+    padding: 20px; /* Optional padding for better spacing */
+}
+
+.responsive-img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain the aspect ratio */
+    max-height: 720px; /* Set a maximum height */
+    object-fit: cover; /* Ensure the image fits well */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+</style>
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>

@@ -52,7 +52,7 @@
             
             <!-- Dynamic Image Uploads -->
             <div class="mb-3">
-                <label class="form-label">Images <br> <small style="color: red">* Jika menambahkan file baru, file sebelumnnya hilang</small></label>
+                <label class="form-label">Images <br> <small style="color: red">*   Jika menambahkan file baru, file sebelumnnya hilang</small></label>
                 <div id="imagesContainer">
                     @foreach ($img as $image)
                         <div class="input-group mb-2">
@@ -67,10 +67,7 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="harga" class="form-label">Price</label>
-                <input type="number" class="form-control" id="harga" name="harga" value="{{ $data->harga }}" required style="outline: 2px solid grey;">
-            </div>
+
             
             <div class="mb-3">
                 <label for="jenis_id" class="form-label">Type</label>
@@ -91,6 +88,20 @@
                     @endforeach
                 </select>
             </div>
+
+            <div class="mb-3">
+                <label for="detail" class="form-label">Detail</label>
+                <textarea name="detail" id="detail" cols="30" rows="10">{{ old('detail', $data->detail ?? '') }}</textarea>
+            </div>
+            
+            <!-- Include CKEditor -->
+            <script src="https://cdn.ckeditor.com/4.20.2/full/ckeditor.js"></script>
+            
+            <script>
+                // Initialize CKEditor on the textarea
+                CKEDITOR.replace('detail');
+            </script>
+            
             
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Save Changes</button>

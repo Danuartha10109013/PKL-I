@@ -378,6 +378,20 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="detail" class="form-label">Detail</label>
+                                <textarea name="detail" id="detail" cols="30" rows="10"></textarea>
+                            </div>
+                            
+                            <!-- Include CKEditor -->
+                            <script src="https://cdn.ckeditor.com/4.20.2/full/ckeditor.js"></script>
+                            
+                            <script>
+                                // Initialize CKEditor on the textarea
+                                CKEDITOR.replace('detail');
+                            </script>
+                            
                         </div>
                         
                         <div class="modal-footer">
