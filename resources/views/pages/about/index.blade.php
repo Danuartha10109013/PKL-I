@@ -101,8 +101,7 @@ PT. Trisurya Solusindo Utama || About
             <p class="text-muted mt-3">Informasi kontak kami tersedia di bawah ini:</p>
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <p><strong>Alamat:</strong> {{ $data->alamat }}</p>
-                    <p><strong>Hotline:</strong> {{ $data->hotline }}</p>
+                    <p><strong>Hotline:</strong> +{{ $data->hotline }}</p>
                     <p><strong>Email:</strong> <a href="mailto:{{ $data->email }}" style="color: #ff4e50;">{{ $data->email }}</a></p>
                 </div>
             </div>

@@ -26,15 +26,19 @@ class LandingController extends Controller
         $category = $request->input('category');
 
         // Query ProdukM dengan filter search dan category
-        $data = ProdukM::query()
-            ->when($category, function ($query, $category) {
-                $c = KategoriM::where('name',$category)->value('id');
-                return $query->where('kategori_id', 'LIKE', '%' . $c . '%'); // Pastikan 'category' adalah kolom yang sesuai
-            })
-            ->when($search, function ($query, $search) {
-                return $query->where('name', 'LIKE', '%' . $search . '%');
-            })
-            ->get();
+        if($category == 'rekomendasi'){
+            $data = ProdukM::where('rekomendasi',1)->get();
+        }else{
+            $data = ProdukM::query()
+                ->when($category, function ($query, $category) {
+                    $c = KategoriM::where('name',$category)->value('id');
+                    return $query->where('kategori_id', 'LIKE', '%' . $c . '%'); // Pastikan 'category' adalah kolom yang sesuai
+                })
+                ->when($search, function ($query, $search) {
+                    return $query->where('name', 'LIKE', '%' . $search . '%');
+                })
+                ->get();
+        }
 
         $category = KategoriM::all();
 

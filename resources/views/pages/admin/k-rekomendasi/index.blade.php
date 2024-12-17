@@ -78,7 +78,7 @@
                                 data-bs-toggle="modal" 
                                 data-bs-target="#confirmationModal" 
                                 data-action="{{ route('admin.k-rekomendasi.active', $d->id) }}"
-                                data-message="Are you sure you want to set this as Nonactive?">
+                                data-message="Are you sure you want to set this as Active?">
                                 <i class="fa fa-times"></i> Nonactive
                             </button>
                             @else
@@ -87,7 +87,7 @@
                                 data-bs-toggle="modal" 
                                 data-bs-target="#confirmationModal" 
                                 data-action="{{ route('admin.k-rekomendasi.nonactive', $d->id) }}"
-                                data-message="Are you sure you want to set this as Active?">
+                                data-message="Are you sure you want to set this as Nonactive?">
                                 <i class="fa fa-check"></i> Active
                             </button>
                             @endif

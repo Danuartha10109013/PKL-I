@@ -211,8 +211,13 @@
                     <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $d->name }}</td>
-                        <td>{{ $d->kategori_id }}</td>
-                        <td>{{ $d->jenis_id }}</td>
+                        <td>
+                            @php
+                                $kategori = \App\Models\KategoriM::find($d->kategori_id);
+                                $jenis = \App\Models\JenisM::find($d->jenis_id);
+                            @endphp
+                            {{$kategori->name}}
+                        <td>{{ $jenis->name }}</td>
                         <td class="align-middle">
                             <!-- Slider for Images -->
                             @if($d->gambar)

@@ -86,7 +86,7 @@ PT. Trisurya Solusindo Utama || Main Pages
                         </style>
                     
                         <div class="slider" id="imageSlider">
-                            <img class="mt-5" src="{{ asset('slider.jpg') }}" alt="Profile Image" id="sliderImage">
+                            <img class="mt-5" src="{{ asset('TSR1.png') }}" alt="Profile Image" id="sliderImage">
                             <div class="controls">
                                 <button class="prev" id="prevBtn">&lt;</button>
                                 <button class="next" id="nextBtn">&gt;</button>
@@ -251,7 +251,7 @@ PT. Trisurya Solusindo Utama || Main Pages
     </div>
 </header>
 <!-- About Section-->
-<section class="bg-light py-5" data-aos="fade-up">
+{{-- <section class="bg-light py-5" data-aos="fade-up">
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-xxl-8">
@@ -405,7 +405,7 @@ PT. Trisurya Solusindo Utama || Main Pages
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 <section class="container">
     <img src="{{ asset('section.png') }}" 

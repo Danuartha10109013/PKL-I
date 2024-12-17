@@ -36,6 +36,11 @@ PT. Trisurya Solusindo Utama || Product
         <!-- Categories on the Left with Horizontal Scrolling -->
         <div class="col-md-4">
             <div class="d-flex gap-2 overflow-auto" style="white-space: nowrap;">
+                <a class="btn btn-outline-primary {{ request('category') == 'rekomendasi' ? 'active' : '' }}" 
+                    style="font-size: 15px;" 
+                    href="{{ route('product', ['category' => 'rekomendasi', 'search' => request('search')]) }}">
+                     Rekomendasi
+                 </a>
                 @foreach ($category as $c)
                 <a class="btn btn-outline-primary {{ request('category') == $c->name ? 'active' : '' }}" 
                    style="font-size: 15px;" 
@@ -62,7 +67,9 @@ PT. Trisurya Solusindo Utama || Product
     </div>
     
     
+    
     <section class="py-5">
+
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 @foreach ($data as $d)
