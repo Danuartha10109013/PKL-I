@@ -53,7 +53,7 @@ class ProdukController extends Controller
         $nomor = $profile->hotline; // Ganti 0821 menjadi 62821 (62 adalah kode negara Indonesia)
         
         // Pesan WhatsApp
-        $message = urlencode("Saya dari {$pesanan->company_name} sangat tertarik dan ingin membeli produk dari PT. Trisurya Solusi Indo. Nama Produk: {$produk->name}");
+        $message = urlencode("Saya dari {$pesanan->company_name} sangat tertarik dan ingin membeli produk dari PT. Trisurya Solusindo Utama. Nama Produk: {$produk->name}");
         
         // URL WhatsApp
         $whatsappLink = "https://wa.me/{$nomor}?text={$message}";

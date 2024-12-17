@@ -24,6 +24,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[LandingController::class,'index'])->name('landing-page');
 
+Route::get('/download/{file}', function ($file) {
+    $filePath = public_path($file); // Mengambil file dari folder 'public'
+    if (file_exists($filePath)) {
+        return response()->download($filePath);
+    }
+    return abort(404, 'File not found');
+});
+
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
 Route::post('/login-proses', [LoginController::class, 'proses'])->name('login-proses');

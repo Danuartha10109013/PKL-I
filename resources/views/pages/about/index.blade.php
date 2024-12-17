@@ -18,6 +18,9 @@ PT. Trisurya Solusindo Utama || About
                 <div class="card-body text-center">
                     <h2 class="card-title fw-bold">{{ $data->judul }}</h2>
                     <p class="mt-3" style="color: rgba(255, 255, 255, 0.8);">{{ $data->desc_judul }}</p>
+                    <p>
+                        <a href="/download/COMPANY PROFIL TRISURYA SOLUSINDO.pdf">Click Here</a> For Download Our Company Profile
+                    </p>
                 </div>
             </div>
         </div>
