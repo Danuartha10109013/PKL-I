@@ -64,4 +64,15 @@ class KPesananController extends Controller
         header("Location: $whatsappLink");
         exit;
     }
+
+    public function delete($id){
+        // dd($id);
+        $data = PesananM::find($id);
+        if($data){
+            $data->delete();
+            return redirect()->back()->with('success','Pemesan telah berhasil dihapus');
+        }else{
+            return redirect()->back()->with('error','Gagal Menghapus');
+        }
+    }
 }

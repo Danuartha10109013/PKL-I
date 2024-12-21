@@ -21,6 +21,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($data)
                     @foreach ($data as $d)
                     <tr>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ $loop->iteration }}</td>
@@ -29,10 +30,19 @@
                                 $user = \App\Models\User::find($d->user_id);
                                 $produk = \App\Models\ProdukM::find($d->product_id);
                             @endphp
-                            &nbsp;&nbsp;&nbsp;&nbsp;{{ $user->name}}</td>
+                            @if ($user)
+                                &nbsp;&nbsp;&nbsp;&nbsp;{{ $user->name }}
+                            @else
+                                &nbsp;&nbsp;&nbsp;&nbsp;User not found
+                            @endif
+                        </td>
                         <td>
-                            
+                            @if ($produk)
                             &nbsp;&nbsp;&nbsp;&nbsp;{{ $produk->name}}</td>
+                            @else
+                            &nbsp;&nbsp;&nbsp;&nbsp;Produk not found
+                            @endif
+                            
                         <td>&nbsp;&nbsp;&nbsp;{{ $d->status }}</td>
                         <td>
                             @php
@@ -59,7 +69,6 @@
                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $d->id }}">Edit</button>
                         </td>
                     </tr>
-                    
                     <!-- Edit User Modal -->
                     <div class="modal fade" id="editUserModal{{ $d->id }}" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -96,9 +105,13 @@
                             </div>
                         </div>
                     </div>
-
-                    
                     @endforeach
+                    @else
+                    <tr>
+                        <td>Data Belom Ada</td>
+                    </tr>
+                    @endif
+                    
                 </tbody>
             </table>
         </div>

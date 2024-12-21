@@ -40,6 +40,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/product', [LandingController::class, 'product'])->name('product');
 Route::get('/product/wa/{id}', [ProdukController::class, 'form'])->name('product.whatsapp');
 Route::post('/product/send', [ProdukController::class, 'send'])->name('product.whatsapp.send');
+Route::get('/product/manual_book/{id}',[KProductController::class, 'download'])->name('product.manual_book');
+
 
 //Customer
 Route::get('/customer', [LandingController::class, 'customer'])->name('customer');
@@ -87,6 +89,7 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::get('/edit/{id}',[KProductController::class, 'edit'])->name('product.edit');
             Route::put('/update/{id}',[KProductController::class, 'update'])->name('product.update');
             Route::delete('/delete/{id}',[KProductController::class, 'delete'])->name('product.delete');
+            Route::get('/download/{id}',[KProductController::class, 'download'])->name('product.download');
         });
         Route::prefix('rekomendasi')->group(function () {
             Route::get('/',[KRekomendasiController::class, 'index'])->name('rekomendasi');
@@ -98,6 +101,7 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::get('/',[KPesananController::class, 'index'])->name('pemesanan');
             Route::post('/active/{id}',[KPesananController::class, 'active'])->name('pemesanan.active');
             Route::get('/message/{id}',[KPesananController::class, 'message'])->name('pemesanan.message');
+            Route::delete('/delete/{id}',[KPesananController::class, 'delete'])->name('pemesanan.delete');
             
         });
         Route::prefix('slider')->group(function () {

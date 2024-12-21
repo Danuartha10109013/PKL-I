@@ -19,7 +19,7 @@ class ProdukController extends Controller
         // Validate the incoming data
         $validated = $request->validate([
             'nama' => 'nullable|string|max:255',
-            'email' => 'nullable|email|max:255',
+            'email' => 'nullable|email|unique:users,email',
             'no_whatsapp' => 'required|string|max:20',
             'perusahaan' => 'required|string|max:255',
             'alamat' => 'nullable|string|max:255',

@@ -70,6 +70,49 @@
                                 </a>
                                 @endif
 
+                                <!-- Delete Button -->
+                                <a href="javascript:void(0)" 
+                                class="btn btn-danger" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deleteModal" 
+                                data-id="{{ $d->id }}">Hapus</a>
+
+                                <!-- Delete Confirmation Modal -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin ingin menghapus item ini?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <form id="deleteForm" method="POST" action="">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        const deleteModal = document.getElementById('deleteModal');
+                                        deleteModal.addEventListener('show.bs.modal', function (event) {
+                                            const button = event.relatedTarget; // Button that triggered the modal
+                                            const id = button.getAttribute('data-id'); // Extract id from data-* attribute
+                                            const form = deleteModal.querySelector('#deleteForm');
+                                            form.action = `{{ route('admin.pemesanan.delete', '') }}/${id}`;
+                                        });
+                                    });
+                                </script>
+                                
+
+
                                 <!-- Confirmation Modal -->
                                 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">

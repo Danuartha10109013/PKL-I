@@ -6,12 +6,12 @@
 <div class="container">
     <!-- Button to trigger Kategori modal -->
 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kategoriModal">
-    <i class="fa fa-plus"></i> Kategori
+    <i class="fa fa-edit"></i> Kategori
 </a>
 
 <!-- Button to trigger Jenis modal -->
 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#jenisModal">
-    <i class="fa fa-plus"></i> Jenis
+    <i class="fa fa-edit"></i> Jenis
 </a>
 
 <!-- Kategori Modal -->
@@ -19,7 +19,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="kategoriModalLabel">Tambah Kategori</h5>
+                <h5 class="modal-title" id="kategoriModalLabel">Edit Kategori</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -28,11 +28,11 @@
                     @csrf
                     <div class="mb-3">
                         <label for="kategoriName" class="form-label">Nama Kategori</label>
-                        <input type="text" class="form-control" id="kategoriName" name="nama_kategori" required>
+                        <input type="text" class="form-control" style="outline: 2px solid grey;" id="kategoriName" name="nama_kategori" required>
                     </div>
                     <div class="mb-3">
                         <label for="kategoriDesc" class="form-label">Deskripsi Kategori</label>
-                        <textarea class="form-control" id="kategoriDesc" name="deskripsi_kategori" rows="3" required></textarea>
+                        <textarea class="form-control" style="outline: 2px solid grey;" id="kategoriDesc" name="deskripsi_kategori" rows="3" required></textarea>
                     </div>
 
                     <!-- Display existing categories -->
@@ -80,7 +80,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jenisModalLabel">Tambah Jenis</h5>
+                <h5 class="modal-title" id="jenisModalLabel">Edit Jenis</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -88,11 +88,11 @@
                     @csrf
                     <div class="mb-3">
                         <label for="jenisName" class="form-label">Nama Jenis</label>
-                        <input type="text" class="form-control" id="jenisName" name="nama_jenis" required>
+                        <input type="text" class="form-control" style="outline: 2px solid grey;" id="jenisName" name="nama_jenis" required>
                     </div>
                     <div class="mb-3">
                         <label for="jenisDesc" class="form-label">Deskripsi Jenis</label>
-                        <textarea class="form-control" id="jenisDesc" name="deskripsi_jenis" rows="3" required></textarea>
+                        <textarea class="form-control" id="jenisDesc" style="outline: 2px solid grey;" name="deskripsi_jenis" rows="3" required></textarea>
                     </div>
 
                     
@@ -203,6 +203,7 @@
                         <th>Jenis</th>
                         <th>Spesifikasi</th>
                         <th>Gambar</th>
+                        <th>Manual Book</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -255,6 +256,10 @@
                                     @endforeach
                                 </ul>
                             @endif
+                        </td>
+
+                        <td>
+                            <a href="{{route('admin.product.download',$d->id)}}" class="btn btn-secondary"><i class="material-symbols-rounded">download</i></a>
                         </td>
                         
                         <td class="text-center align-middle">
@@ -387,6 +392,10 @@
                             <div class="mb-3">
                                 <label for="detail" class="form-label">Detail</label>
                                 <textarea name="detail" id="detail" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="manual_book" class="form-label">Manual Book</label>
+                                <input type="file" name="manual_book" id="manual_book" class="form-control">
                             </div>
                             
                             <!-- Include CKEditor -->

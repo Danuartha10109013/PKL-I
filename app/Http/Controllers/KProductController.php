@@ -46,7 +46,17 @@ class KProductController extends Controller
         'jenis_id' => 'required|integer',
         'kategori_id' => 'required|integer',
         'detail' => 'required',
+        'manual_book' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        
     ]);
+
+
+    if ($request->hasFile('manual_book')) {
+        $filename = $request->file('manual_book')->getClientOriginalName();
+        $path = $request->file('manual_book')->storeAs("file/products/{$request->kode_produk}", $filename, 'public');
+        $uploadedManual = $path;
+    }
+    
 
     // Initialize an array to store the relative paths of uploaded images
     $uploadedImages = [];
@@ -70,6 +80,7 @@ class KProductController extends Controller
         'sfesifikasi' => json_encode($request->sfesifikasi), // Encode specs as JSON
         'gambar' => json_encode($uploadedImages), // Encode image paths as JSON
         'jenis_id' => $request->jenis_id,
+        'manual_book' => $uploadedManual,
         'kategori_id' => $request->kategori_id,
         'detail' => $request->detail,
     ]);
@@ -198,5 +209,25 @@ class KProductController extends Controller
 
         return redirect()->back()->with('success', 'Jenis Telah Ditambahkan');
     }
+
+    public function download($id)
+    {
+        $data = ProdukM::find($id);
+    
+        if (!$data || !$data->manual_book) {
+            return redirect()->back()->with('error', 'Manual book not found.');
+        }
+    
+        // Use Storage facade to get the file's path
+        $filePath = Storage::disk('public')->path($data->manual_book);
+    
+        if (!file_exists($filePath)) {
+            return redirect()->back()->with('error', 'File does not exist.');
+        }
+    
+        return response()->download($filePath);
+    }
+    
+    
 
 }

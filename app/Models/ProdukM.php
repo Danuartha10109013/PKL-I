@@ -21,5 +21,6 @@ class ProdukM extends Model
         'jenis_id',
         'kategori_id',
         'detail',
+        'manual_book',
     ];
 }

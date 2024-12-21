@@ -202,8 +202,9 @@ PT. Trisurya Solusindo Utama || Product
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mt-2">
                                                             <div class="col-md-12 text-center">
+                                                                <a href="{{route('product.manual_book',$d->id)}}" class="btn btn-secondary"><i class="fa fa-download"></i> Download Manual Book</a>
                                                                 <a href="{{route('product.whatsapp',$d->id)}}" class="btn btn-success"><i class="fa-brands fa-whatsapp"></i> Pesan Sekarang</a>
                                                             </div>
                                                         </div>
