@@ -85,7 +85,9 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::post('/store',[KProductController::class, 'store'])->name('product.store');
             Route::post('/kategori',[KProductController::class, 'kategori'])->name('product.kategori');
             Route::delete('/kategori/delete/{id}',[KProductController::class, 'kategori_delete'])->name('product.kategori.delete');
+            Route::put('/kategori/update/{id}',[KProductController::class, 'kategori_edit'])->name('product.kategori.edit');
             Route::post('/jenis',[KProductController::class, 'jenis'])->name('product.jenis');
+            Route::put('/jenis/update/{id}',[KProductController::class, 'jenis_edit'])->name('product.jenis.edit');
             Route::get('/edit/{id}',[KProductController::class, 'edit'])->name('product.edit');
             Route::put('/update/{id}',[KProductController::class, 'update'])->name('product.update');
             Route::delete('/delete/{id}',[KProductController::class, 'delete'])->name('product.delete');
@@ -108,6 +110,7 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::get('/',[KSliderController::class, 'index'])->name('slider');
             Route::post('/store',[KSliderController::class, 'store'])->name('k-slider.store');
             Route::delete('/delete/{id}',[KSliderController::class, 'delete'])->name('k-slider.delete');
+            Route::put('/update/{id}',[KSliderController::class, 'update'])->name('k-slider.update');
             
         });
         Route::prefix('customer')->group(function () {

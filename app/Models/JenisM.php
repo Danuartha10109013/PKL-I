@@ -12,6 +12,7 @@ class JenisM extends Model
     protected $table = 'jenis';
 
     protected $fillable = [
-
+        'name',
+        'deskripsi',
     ];
 }

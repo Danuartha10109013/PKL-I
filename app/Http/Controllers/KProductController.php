@@ -194,13 +194,38 @@ class KProductController extends Controller
         return redirect()->back()->with('success', 'Kategori Telah Ditambahkan');
         
     }
-
-    public function kategori_delete($id){
-        $data = KategoriM::find($id);
-        $data->delete();
-        return redirect()->back()->with('success', 'Kategori Telah Dihapus');
+    public function kategori_edit(Request $request, $id){
+        $ct = KategoriM::find($id);
+        $ct->name = $request->name;
+        $ct->deskripsi = $request->desc;
+        $ct->save();
+        return redirect()->back()->with('success', 'Kategori Produk has been updated');
 
     }
+
+    public function kategori_delete($id)
+    {
+        // Cari kategori berdasarkan ID
+        $data = KategoriM::find($id);
+    
+        if (!$data) {
+            return redirect()->back()->with('error', 'Kategori tidak ditemukan');
+        }
+    
+        // Cek apakah ada produk yang menggunakan kategori ini
+        $inproduct = ProdukM::where('kategori_id', $id)->exists();
+    
+        if ($inproduct) {
+            // Jika ada produk terkait, tidak dapat dihapus
+            return redirect()->back()->with('error', 'Kategori terintegrasi dengan produk dan tidak dapat dihapus');
+        }
+    
+        // Hapus kategori jika tidak terkait dengan produk
+        $data->delete();
+    
+        return redirect()->back()->with('success', 'Kategori telah dihapus');
+    }
+    
     public function jenis(Request $request){
         $jenia = new JenisM();
         $jenia->name = $request->nama_jenis;
@@ -208,6 +233,15 @@ class KProductController extends Controller
         $jenia->save();
 
         return redirect()->back()->with('success', 'Jenis Telah Ditambahkan');
+    }
+
+    public function jenis_edit(Request $request, $id){
+        $jenis = JenisM::find($id);
+        $jenis->name = $request->name;
+        $jenis->deskripsi = $request->desc;
+        $jenis->save();
+        return redirect()->back()->with('success', 'Jenis Produk has been updated');
+
     }
 
     public function download($id)

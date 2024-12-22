@@ -98,6 +98,11 @@ class KPembeliController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+        $pesanan = PembelianM::where('user_id',$id)->get();
+        foreach($pesanan as $p){
+            $pesanans = PembelianM::find($p->id);
+            $pesanans->delete();
+        }
 
         return redirect()->back()->with('success', 'User deleted successfully.');
     }

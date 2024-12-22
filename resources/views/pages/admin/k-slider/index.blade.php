@@ -24,20 +24,48 @@
                         <td class="align-middle text-center">{{ $loop->iteration }}</td>
                         <td class="align-middle text-center"><img src="{{asset('storage/slider/'.$d->image)}}" width="200px" alt="{{$d->profile}}"></td>
                         <td class="align-middle text-center">
-                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal{{ $d->id }}">Delete</button>
+                            <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#editUserModal{{ $d->id }}">Edit</button>
+                            <button class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteUserModal{{ $d->id }}">Delete</button>
                         </td>
                     </tr>
                     
+                    <!-- Edit User Modal -->
+                    <div class="modal fade" id="editUserModal{{ $d->id }}" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editUserModalLabel">Edit Slider</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete user {{ $d->name }}?
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{{ route('admin.k-slider.update', $d->id) }}" enctype="multipart/form-data" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <p>
+                                            Existing Slider 
+                                        </p>
+                                        <img src="{{asset('storage/slider/'.$d->image)}}" width="30%" alt="">
+                                        <input type="file" name="slider">
+                                        <button type="submit" class="btn btn-danger">Save Changes</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Delete User Modal -->
                     <div class="modal fade" id="deleteUserModal{{ $d->id }}" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteUserModalLabel">Delete User</h5>
+                                    <h5 class="modal-title" id="deleteUserModalLabel">Delete Slider</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Are you sure you want to delete user {{ $d->name }}?
+                                    Are you sure you want to delete Slider {{ $d->name }}?
                                 </div>
                                 <div class="modal-footer">
                                     <form action="{{ route('admin.k-slider.delete', $d->id) }}" method="POST">

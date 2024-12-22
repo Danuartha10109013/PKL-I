@@ -54,10 +54,15 @@
                                 @foreach ($categories as $c)
                                     <tr>
                                         <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$loop->iteration}}</td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$c->name}}</td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$c->deskripsi}}</td>
+                                        <form action="{{route('admin.product.kategori.edit',$c->id)}}" method="POST" >
+                                            @csrf
+                                            @method('PUT')
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="name" value="{{$c->name}}"></td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="desc" value="{{$c->deskripsi}}"></td>
                                         <td>
                                             <!-- Add edit and delete buttons as needed -->
+                                            <button type="submit" class="btn btn-warning">Edit</button>
+                                            </form>
                                             <form action="{{route('admin.product.kategori.delete',$c->id)}}" method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
@@ -114,9 +119,15 @@
                                 @foreach ($types as $t)
                                     <tr>
                                         <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$loop->iteration}}</td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$t->name}}</td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$t->deskripsi}}</td>
+                                        <form action="{{route('admin.product.jenis.edit',$t->id)}}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="name" value="{{$t->name}}"></td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="desc" value="{{$t->deskripsi}}"></td>
                                         <td>
+                                            <button type="submit" class="btn btn-warning">Edit</button>
+                                        </form>
+
                                             <!-- Add edit and delete buttons as needed -->
                                             <form action="" method="POST" style="display:inline-block;">
                                                 @csrf
