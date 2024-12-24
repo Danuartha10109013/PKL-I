@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PemesananExport;
 use App\Models\PembelianM;
 use App\Models\PesananM;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KPesananController extends Controller
 {
@@ -43,7 +45,7 @@ class KPesananController extends Controller
 
         $jadi = new PembelianM();
         $jadi->user_id = $user->id;
-        $jadi->product_id = $id;
+        $jadi->product_id = $data->product_id;
         $jadi->save();
 
 
@@ -74,5 +76,11 @@ class KPesananController extends Controller
         }else{
             return redirect()->back()->with('error','Gagal Menghapus');
         }
+    }
+
+    public function export(){
+        $data = PesananM::all();
+        return Excel::download(new PemesananExport($data), 'Pemesanan_Report.csv');
+
     }
 }

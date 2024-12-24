@@ -85,14 +85,14 @@
                                         <label for="active" class="form-label">Status</label>
                                             <select style="outline: 2px solid grey;" class="form-control" name="product" required>
                                                 <option value="" disabled>--Select Status--</option>
-                                                    <option value="Belum Disiapkan" {{ $d->status == "Belum Disiapkan" ? 'selected' : '' }}>Belum Disiapkan</option>
+                                                    <option value="Belum Disiapkan" {{ $d->status == "PO" ? 'selected' : '' }}>PO</option>
                                                     <option value="Dikemas" {{ $d->status == "Dikemas" ? 'selected' : '' }}>Dikemas</option>
                                                     <option value="Dikirim" {{ $d->status == "Dikirim" ? 'selected' : '' }}>Dikirim</option>
                                                     <option value="Selesai" {{ $d->status == "Selesai" ? 'selected' : '' }}>Selesai</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                        <label for="active" class="form-label">Status</label>
+                                        <label for="active" class="form-label">Dokumen Pesanan</label>
                                             <input type="file" name="bukti" class="form-control">
                                         </div>
                                         

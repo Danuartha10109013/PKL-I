@@ -103,6 +103,7 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::get('/',[KPesananController::class, 'index'])->name('pemesanan');
             Route::post('/active/{id}',[KPesananController::class, 'active'])->name('pemesanan.active');
             Route::get('/message/{id}',[KPesananController::class, 'message'])->name('pemesanan.message');
+            Route::get('/export',[KPesananController::class, 'export'])->name('pemesanan.export');
             Route::delete('/delete/{id}',[KPesananController::class, 'delete'])->name('pemesanan.delete');
             
         });

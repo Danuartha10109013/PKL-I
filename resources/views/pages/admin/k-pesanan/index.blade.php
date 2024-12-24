@@ -8,9 +8,9 @@
     <div class="card">
         <div class="card-body">
             <h1 class="fw-bolder" style="font-size: 24px">Kelola Pesanan</h1>
-            
-            <!-- Search Form -->
-            <div class="d-flex justify-content-end w-100">
+            <div class="d-flex justify-content-between w-100">
+                <a href="{{ route('admin.pemesanan.export') }}" class="btn btn-warning"><i class="fa fa-download"></i> Export</a>
+                <!-- Search Form -->
                 <form action="{{ route('admin.pemesanan') }}" method="GET" class="d-flex">
                     <input 
                         type="text" 
@@ -22,6 +22,7 @@
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                 </form>
             </div>
+            
 
             
             <div class="table-responsive">
