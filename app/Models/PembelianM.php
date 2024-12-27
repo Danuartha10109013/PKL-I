@@ -15,6 +15,8 @@ class PembelianM extends Model
         'user_id',
         'product_id',
         'status',
-        'bukti',
+        'invoice',
+        'no_do',
+        'faktur',
     ];
 }

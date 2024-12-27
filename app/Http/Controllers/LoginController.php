@@ -68,6 +68,16 @@ public function logout(Request $request) {
         return redirect()->route('login')->with('success', 'Kamu berhasil Logout');
     }
 }
+public function logouts(Request $request) {
+    // Mengarahkan kembali ke halaman login dengan pesan sukses
+    if(Auth::user()->role == 0){
+        Auth::logout();
+        return redirect()->route('admin.login')->with('success', 'Kamu berhasil Logout');
+    }else{
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Kamu berhasil Logout');
+    }
+}
 public function logoutUserById($userId)
 {
     // Temukan pengguna dengan ID tertentu

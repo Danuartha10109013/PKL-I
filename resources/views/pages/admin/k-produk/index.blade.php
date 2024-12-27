@@ -212,9 +212,10 @@
                         <th>Produk</th>
                         <th>Kategori</th>
                         <th>Jenis</th>
-                        <th>Spesifikasi</th>
                         <th>Gambar</th>
+                        <th>Spesifikasi</th>
                         <th>Manual Book</th>
+                        <th>Brosur</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -271,6 +272,9 @@
 
                         <td>
                             <a href="{{route('admin.product.download',$d->id)}}" class="btn btn-secondary"><i class="material-symbols-rounded">download</i></a>
+                        </td>
+                        <td>
+                            <a href="{{route('admin.product.downloads',$d->id)}}" class="btn btn-secondary"><i class="material-symbols-rounded">download</i></a>
                         </td>
                         
                         <td class="text-center align-middle">
@@ -407,6 +411,10 @@
                             <div class="mb-3">
                                 <label for="manual_book" class="form-label">Manual Book</label>
                                 <input type="file" name="manual_book" id="manual_book" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="brosur" class="form-label">Brosur</label>
+                                <input type="file" name="brosur" id="brosur" class="form-control">
                             </div>
                             
                             <!-- Include CKEditor -->

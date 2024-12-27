@@ -11,15 +11,12 @@
           
         </div>
       </div>
-      <ul class="navbar-nav d-flex align-items-center  justify-content-end">
-        <li class="nvbar-nav">
-
-          <a class=" avbar-nav d-flex align-items-center  justify-content-end" target="_blank" href="{{route('landing-page')}}">
-            <i class="material-symbols-rounded">home</i>
+      <ul class="navbar-nav d-flex align-items-center justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center justify-content-center" target="_blank" href="{{ route('landing-page') }}">
+            <i class="material-symbols-rounded fixed-plugin-button-nav">home</i>
           </a>
         </li>
-        
-
         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
           <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
             <div class="sidenav-toggler-inner">
@@ -34,38 +31,31 @@
             <i class="material-symbols-rounded fixed-plugin-button-nav">settings</i>
           </a>
         </li>
-        
         <li class="nav-item dropdown d-flex align-items-center">
-          <a href="#" class="nav-link text-body font-weight-bold px-0 " id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a href="#" class="nav-link text-body font-weight-bold px-0 d-flex align-items-center" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             @if (Auth::user()->profile)
-              
-            <img src="{{ asset('storage/' . Auth::user()->profile)}}" 
-                 class="rounded-circle" 
-                 alt="Profile" 
-                 width="30" 
-                 height="30"
-                >
-                @else
-                <i class="material-symbols-rounded">account_circle</i>
+            <img src="{{ asset('storage/' . Auth::user()->profile)}}" class="rounded-circle" alt="Profile" width="30" height="30">
+            @else
+            <i class="material-symbols-rounded">account_circle</i>
             @endif
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <li>
-              <a class="dropdown-item" href="{{ route('profile') }}">
-                <i class="material-symbols-rounded">edit</i> Edit Profile
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}">
+                <i class="material-symbols-rounded me-2">edit</i> Edit Profile
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="material-symbols-rounded">logout</i> Logout
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('logouts') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="material-symbols-rounded me-2">logout</i> Logout
               </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              <form id="logout-form" action="{{ route('logouts') }}" method="POST" class="d-none">
                 @csrf
               </form>
             </li>
           </ul>
         </li>
-        
       </ul>
+      
     </div>
   </div>

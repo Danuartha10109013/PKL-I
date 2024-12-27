@@ -42,11 +42,12 @@ class KProductController extends Controller
         'deskripsi' => 'required|string',
         'sfesifikasi' => 'required|array', // Ensure this is an array
         'gambar' => 'required|array', // Ensure this is an array
-        'gambar.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Each image file validation
+        'gambar.*' => 'image|mimes:jpeg,png,jpg,gif,svg', // Each image file validation
         'jenis_id' => 'required|integer',
         'kategori_id' => 'required|integer',
         'detail' => 'required',
-        'manual_book' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        'manual_book' => 'required|file|mimes:pdf,doc,docx',
+        'brosur' => 'required|file|mimes:pdf,doc,docx',
         
     ]);
 
@@ -55,6 +56,11 @@ class KProductController extends Controller
         $filename = $request->file('manual_book')->getClientOriginalName();
         $path = $request->file('manual_book')->storeAs("file/products/{$request->kode_produk}", $filename, 'public');
         $uploadedManual = $path;
+    }
+    if ($request->hasFile('brosur')) {
+        $filenames = $request->file('brosur')->getClientOriginalName();
+        $paths = $request->file('brosur')->storeAs("file/products/{$request->kode_produk}", $filenames, 'public');
+        $uploadedBrosur = $paths;
     }
     
 
@@ -81,6 +87,7 @@ class KProductController extends Controller
         'gambar' => json_encode($uploadedImages), // Encode image paths as JSON
         'jenis_id' => $request->jenis_id,
         'manual_book' => $uploadedManual,
+        'brosur' => $uploadedBrosur,
         'kategori_id' => $request->kategori_id,
         'detail' => $request->detail,
     ]);
@@ -98,7 +105,7 @@ class KProductController extends Controller
     // Update Product
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        dd($request->all());
         // Validate the incoming data
         $request->validate([
             'kode_produk' => 'required|string|max:255',
@@ -112,11 +119,23 @@ class KProductController extends Controller
             'kategori_id' => 'required|exists:kategori,id',
             'delete_gambar' => 'nullable|array',
             'delete_gambar.*' => 'integer',
+            'manual_book' => 'required|file|mimes:pdf,doc,docx',
+            'brosur' => 'required|file|mimes:pdf,doc,docx',
         ]);
 
         // Find the product by ID
         $product = ProdukM::findOrFail($id);
 
+        if ($request->hasFile('manual_book')) {
+            $filename = $request->file('manual_book')->getClientOriginalName();
+            $path = $request->file('manual_book')->storeAs("file/products/{$request->kode_produk}", $filename, 'public');
+            $uploadedManual = $path;
+        }
+        if ($request->hasFile('brosur')) {
+            $filenames = $request->file('brosur')->getClientOriginalName();
+            $paths = $request->file('brosur')->storeAs("file/products/{$request->kode_produk}", $filenames, 'public');
+            $uploadedBrosur = $paths;
+        }
         // Update basic product fields
         $product->kode_produk = $request->kode_produk;
         $product->name = $request->name;
@@ -124,6 +143,8 @@ class KProductController extends Controller
         $product->jenis_id = $request->jenis_id;
         $product->kategori_id = $request->kategori_id;
         $product->detail = $request->detail;
+        $product->manual_book = $uploadedManual;
+        $product->brosur = $uploadedBrosur;
 
         if ($request->has('sfesifikasi')) {
             // Filter out any null values
@@ -254,6 +275,23 @@ class KProductController extends Controller
     
         // Use Storage facade to get the file's path
         $filePath = Storage::disk('public')->path($data->manual_book);
+    
+        if (!file_exists($filePath)) {
+            return redirect()->back()->with('error', 'File does not exist.');
+        }
+    
+        return response()->download($filePath);
+    }
+    public function downloads($id)
+    {
+        $data = ProdukM::find($id);
+    
+        if (!$data || !$data->brosur) {
+            return redirect()->back()->with('error', 'Manual book not found.');
+        }
+    
+        // Use Storage facade to get the file's path
+        $filePath = Storage::disk('public')->path($data->brosur);
     
         if (!file_exists($filePath)) {
             return redirect()->back()->with('error', 'File does not exist.');

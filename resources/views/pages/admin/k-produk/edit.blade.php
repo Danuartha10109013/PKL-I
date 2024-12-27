@@ -93,6 +93,15 @@
                 <label for="detail" class="form-label">Detail</label>
                 <textarea name="detail" id="detail" cols="30" rows="10">{{ old('detail', $data->detail ?? '') }}</textarea>
             </div>
+
+            <div class="mb-3">
+                <label for="manual_book" class="form-label">Manual Book</label> <p>Recent Files : {{$data->manual_book ?? ''}}</p>
+                <input type="file" name="manual_book" id="manual_book" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="brosur" class="form-label">Brosur</label> <p>Recent Files : {{$data->brosur ?? ''}}</p>
+                <input type="file" name="brosur" id="brosur" class="form-control">
+            </div>
             
             <!-- Include CKEditor -->
             <script src="https://cdn.ckeditor.com/4.20.2/full/ckeditor.js"></script>

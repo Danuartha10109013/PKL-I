@@ -31,7 +31,7 @@ class KPesananController extends Controller
         return view('pages.admin.k-pesanan.index', compact('data'));
     }
 
-    public function active($id){
+    public function active(Request $request,$id){
         $data = PesananM::find($id);
 
         $user= new User();
@@ -42,6 +42,8 @@ class KPesananController extends Controller
         $user->active = 1;
         $user->password = Hash::make('Trisurya');
         $user->save();
+
+
 
         $jadi = new PembelianM();
         $jadi->user_id = $user->id;

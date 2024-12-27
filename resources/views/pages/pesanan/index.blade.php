@@ -44,31 +44,107 @@
         </div>
 
         <!-- Order Status Section -->
-        <div class="col-md-4">
-            <h5 class="text-center">Order Status</h5>
-            <div class="alert alert-info text-center" role="alert">
-                {{ $data->status }}
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="text-center">Order Status</h5>
+                    <div class="alert alert-info text-center" role="alert">
+                        {{ $data->status }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Proof of Payment Section -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5 class="text-center">Dokumen PO</h5>
+                            @php
+                                $filePath = storage_path('app/' . $data->bukti);
+                                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
+                            @endphp
+
+                            <div class="text-center">
+                                @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'bmp']))
+                                    <img src="{{ asset('storage/' . $data->bukti) }}" alt="Bukti" style="width: 100px; height: auto;" class="rounded">
+                                @elseif($fileExtension === 'pdf')
+                                    <a href="{{ asset('storage/' . $data->bukti) }}" target="_blank" class="btn btn-danger">View PDF</a>
+                                    @elseif($fileExtension === 'docx')
+                                    <a href="{{ asset('storage/' . $data->bukti) }}" target="_blank" class="btn btn-secondary">Download File</a>
+                                @else
+                                <p>Document not Available</p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="text-center">Invoice</h5>
+                            @php
+                                $filePath = storage_path('app/' . $data->invoice);
+                                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
+                            @endphp
+
+                            <div class="text-center">
+                                @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'bmp']))
+                                    <img src="{{ asset('storage/' . $data->invoice) }}" alt="invoice" style="width: 100px; height: auto;" class="rounded">
+                                @elseif($fileExtension === 'pdf')
+                                    <a href="{{ asset('storage/' . $data->invoice) }}" target="_blank" class="btn btn-danger">View PDF</a>
+                                    @elseif($fileExtension === 'docx')
+                                    <a href="{{ asset('storage/' . $data->invoice) }}" target="_blank" class="btn btn-secondary">Download File</a>
+                                @else
+                                <p>Document not Available</p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="text-center">Dokumen DO</h5>
+                            @php
+                                $filePath = storage_path('app/' . $data->no_do);
+                                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
+                            @endphp
+
+                            <div class="text-center">
+                                @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'bmp']))
+                                    <img src="{{ asset('storage/' . $data->no_do) }}" alt="no_do" style="width: 100px; height: auto;" class="rounded">
+                                @elseif($fileExtension === 'pdf')
+                                    <a href="{{ asset('storage/' . $data->no_do) }}" target="_blank" class="btn btn-danger">View PDF</a>
+                                    @elseif($fileExtension === 'docx')
+                                    <a href="{{ asset('storage/' . $data->no_do) }}" target="_blank" class="btn btn-secondary">Download File</a>
+                                @else
+                                <p>Document not Available</p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="text-center">Faktur Pajak</h5>
+                            @php
+                                $filePath = storage_path('app/' . $data->faktur);
+                                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
+                            @endphp
+
+                            <div class="text-center">
+                                @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'bmp']))
+                                    <img src="{{ asset('storage/' . $data->faktur) }}" alt="faktur" style="width: 100px; height: auto;" class="rounded">
+                                @elseif($fileExtension === 'pdf')
+                                    <a href="{{ asset('storage/' . $data->faktur) }}" target="_blank" class="btn btn-danger">View PDF</a>
+                                @elseif($fileExtension === 'docx')
+                                    <a href="{{ asset('storage/' . $data->faktur) }}" target="_blank" class="btn btn-secondary">Download File</a>
+                                @else
+                                <p>Document not Available</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                        
+                        
+                        
+                        
+                        
+                </div>
             </div>
         </div>
+        
 
-        <!-- Proof of Payment Section -->
-        <div class="col-md-4">
-            <h5 class="text-center">Proof of Payment</h5>
-            @php
-                $filePath = storage_path('app/' . $data->bukti);
-                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
-            @endphp
-
-            <div class="text-center">
-                @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'bmp']))
-                    <img src="{{ asset('storage/' . $data->bukti) }}" alt="Bukti" style="width: 100px; height: auto;" class="rounded">
-                @elseif($fileExtension === 'pdf')
-                    <a href="{{ asset('storage/' . $data->bukti) }}" target="_blank" class="btn btn-danger">View PDF</a>
-                @else
-                    <a href="{{ asset('storage/' . $data->bukti) }}" target="_blank" class="btn btn-secondary">Download File</a>
-                @endif
-            </div>
-        </div>
+        
     </div>
 
     <!-- Add Testimonial Section -->

@@ -49,15 +49,16 @@
                                         @method('PUT')
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Name</label>
-                                            <input type="text" class="form-control" name="name" value="{{ $d->name }}" required>
+                                            <input type="text" class="form-control" style="outline: 2px solid grey;" name="name" value="{{ $d->name }}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="phone" class="form-label">Phone</label>
-                                            <input type="text" class="form-control" name="phone" value="{{ $d->phone }}" required>
+                                            <label for="phone" class="form-label">Phone</label> <br>
+                                            <small style="color: red;font-size: 12px">* Jangan menggunakan "-" / " " (spasi). Awali dengan +62 bukan 0</small>
+                                            <input type="text" class="form-control" style="outline: 2px solid grey;" name="phone" value="{{ $d->phone }}" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="operation_time" class="form-label">Operation Time</label>
-                                            <input type="text" class="form-control" name="operation_time" value="{{ $d->operation_time }}" required>
+                                            <input type="text" class="form-control" style="outline: 2px solid grey;" name="operation_time" value="{{ $d->operation_time }}" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="profile" class="form-label">Profile</label>
@@ -115,15 +116,16 @@
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" required>
+                        <input type="text" style="outline: 2px solid grey;" class="form-control" name="name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" name="phone" required>
+                        <label for="phone" class="form-label">Phone</label> <br>
+                        <small style="color: red;font-size: 12px">* Jangan menggunakan "-" / " " (spasi). Awali dengan +62 bukan 0</small>
+                        <input type="text" style="outline: 2px solid grey;" class="form-control" name="phone" required>
                     </div>
                     <div class="mb-3">
                         <label for="operation_time" class="form-label">Operation Time</label>
-                        <input type="text" class="form-control" name="operation_time" required>
+                        <input type="text" style="outline: 2px solid grey;" class="form-control" name="operation_time" required>
                     </div>
                     <div class="mb-3">
                         <label for="profile" class="form-label">Profile</label>

@@ -35,12 +35,14 @@ Route::get('/download/{file}', function ($file) {
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
 Route::post('/login-proses', [LoginController::class, 'proses'])->name('login-proses');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logouts', [LoginController::class, 'logouts'])->name('logouts');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 //Produk
 Route::get('/product', [LandingController::class, 'product'])->name('product');
 Route::get('/product/wa/{id}', [ProdukController::class, 'form'])->name('product.whatsapp');
 Route::post('/product/send', [ProdukController::class, 'send'])->name('product.whatsapp.send');
 Route::get('/product/manual_book/{id}',[KProductController::class, 'download'])->name('product.manual_book');
+Route::get('/product/brosur/{id}',[KProductController::class, 'downloads'])->name('product.brosur');
 
 
 //Customer
@@ -92,6 +94,7 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::put('/update/{id}',[KProductController::class, 'update'])->name('product.update');
             Route::delete('/delete/{id}',[KProductController::class, 'delete'])->name('product.delete');
             Route::get('/download/{id}',[KProductController::class, 'download'])->name('product.download');
+            Route::get('/downloads/{id}',[KProductController::class, 'downloads'])->name('product.downloads');
         });
         Route::prefix('rekomendasi')->group(function () {
             Route::get('/',[KRekomendasiController::class, 'index'])->name('rekomendasi');
