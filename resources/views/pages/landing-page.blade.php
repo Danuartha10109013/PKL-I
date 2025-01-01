@@ -24,7 +24,7 @@ PT. Trisurya Solusindo Utama || Main Pages
                     </div>
                     
                 </div>
-                <p>www.trisuryasolusindo.com|@reallygreatsite</p>
+                <p>info@trisuryasolusindo.com</p>
             </div>
             <div class="col-xxl-7 text-center">
                 <!-- Header profile picture-->
