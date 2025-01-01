@@ -57,26 +57,8 @@
                 <div class="col-md-12">
                     <!-- Proof of Payment Section -->
                     <div class="row">
-                        <div class="col-md-3">
-                            <h5 class="text-center">Dokumen PO</h5>
-                            @php
-                                $filePath = storage_path('app/' . $data->bukti);
-                                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
-                            @endphp
-
-                            <div class="text-center">
-                                @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'bmp']))
-                                    <img src="{{ asset('storage/' . $data->bukti) }}" alt="Bukti" style="width: 100px; height: auto;" class="rounded">
-                                @elseif($fileExtension === 'pdf')
-                                    <a href="{{ asset('storage/' . $data->bukti) }}" target="_blank" class="btn btn-danger">View PDF</a>
-                                    @elseif($fileExtension === 'docx')
-                                    <a href="{{ asset('storage/' . $data->bukti) }}" target="_blank" class="btn btn-secondary">Download File</a>
-                                @else
-                                <p>Document not Available</p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-3">
+                        
+                        <div class="col-md-4">
                             <h5 class="text-center">Invoice</h5>
                             @php
                                 $filePath = storage_path('app/' . $data->invoice);
@@ -95,7 +77,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h5 class="text-center">Dokumen DO</h5>
                             @php
                                 $filePath = storage_path('app/' . $data->no_do);
@@ -114,7 +96,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h5 class="text-center">Faktur Pajak</h5>
                             @php
                                 $filePath = storage_path('app/' . $data->faktur);
