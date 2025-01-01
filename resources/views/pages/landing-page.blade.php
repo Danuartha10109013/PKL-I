@@ -14,7 +14,7 @@ PT. Trisurya Solusindo Utama || Main Pages
                 <div class="text-center text-xxl-start">
                     <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">Design &middot; Development &middot; Marketing</div></div>
                     <h1 class="display-3 fw-bolder mb-1"><span class="text-gradient d-inline" style="font-size: 52px">PT. Trisurya Solusindo Utama</span></h1>
-                    <div class="fs-3 fw-bold mb-2 text-muted" style="font-size:15px " >Weighing Solution and System Integration & Specialist Purpose Machine</div>
+                    <div class="fs-5 fw-bold mb-2 text-muted" style="font-size:2px " >Weighing Solution and System Integration & Specialist Purpose Machine</div>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
                         <form action="{{route('product')}}" method="GET" class="d-flex">
                             <input type="hidden" name="category" value="{{ request('category') }}">
