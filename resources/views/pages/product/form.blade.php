@@ -50,12 +50,12 @@ PT. Trisurya Solusindo Utama || Pesan Product
                 </div>
                 <div class="col-md-4">
                     <div class="form-control mb-3">
-                        <label for="nama"><i class="fas fa-user"></i> Nama </label>
+                        <label for="nama"><i class="fas fa-user"></i> Nama <small style="color: red">*</small></label>
                         <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama" >
                     </div>
                     
                     <div class="form-control mb-3">
-                        <label for="email"><i class="fas fa-envelope"></i> Email </label>
+                        <label for="email"><i class="fas fa-envelope"></i> Email <small style="color: red">*</small></label>
                         <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan Email" >
                     </div>
                     
@@ -73,12 +73,12 @@ PT. Trisurya Solusindo Utama || Pesan Product
                     </div>
                     
                     <div class="form-control mb-3">
-                        <label for="alamat"><i class="fas fa-map-marker-alt"></i> Alamat </label>
+                        <label for="alamat"><i class="fas fa-map-marker-alt"></i> Alamat <small style="color: red">*</small></label>
                         <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Masukkan Alamat Perusahaan" >
                     </div>
                     
                     <div class="form-control mb-3">
-                        <label for="email_perusahaan"><i class="fas fa-building"></i> Email Perusahaan </label>
+                        <label for="email_perusahaan"><i class="fas fa-building"></i> Email Perusahaan <small style="color: red">*</small></label>
                         <input type="email" name="email_perusahaan" class="form-control" id="email_perusahaan" placeholder="Masukkan Email Perusahaan" >
                     </div>
                 </div>
