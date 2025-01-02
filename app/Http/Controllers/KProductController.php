@@ -105,7 +105,7 @@ class KProductController extends Controller
     // Update Product
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         // Validate the incoming data
         $request->validate([
             'kode_produk' => 'required|string|max:255',
